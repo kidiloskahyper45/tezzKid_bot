@@ -3,8 +3,6 @@ import time
 import re
 from sys import argv
 from typing import Optional
-#For Help Button
-from telegram import Message, Chat, Update, Bot, User
 
 from SaitamaRobot import (ALLOW_EXCL, CERT_PATH, DONATION_LINK, LOGGER,
                           OWNER_ID, PORT, SUPPORT_CHAT, TOKEN, URL, WEBHOOK,
@@ -61,7 +59,7 @@ You can find my list of available commands with /help.
 
 HELP_STRINGS = """
 Hey there! My name is *{}*.
-I'm Dr Stone and I help admins to manage their groups with my powers! Have a look at the following for an idea of some of \
+I'm Dr Stone & I help admins to manage their groups! Have a look at the following for an idea of some of \
 the things I can help you with.
 
 *Main* commands available:
@@ -82,7 +80,7 @@ And the following:
 SAITAMA_IMG = "https://images.alphacoders.com/103/thumb-1920-1031089.jpg"
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
-Saitama is hosted on one of Kaizoku's Servers and doesn't require any donations as of now but \
+Senku is hosted on one of Heroku's Servers and doesn't require any donations as of now but \
 You can donate to the original writer of the Base code, Paul
 There are two ways of supporting him; [PayPal](paypal.me/PaulSonOfLars), or [Monzo](monzo.me/paulnionvestergaardlarsen)."""
 
@@ -134,58 +132,6 @@ for module_name in ALL_MODULES:
         USER_SETTINGS[imported_module.__mod_name__.lower()] = imported_module
 
 
-#adding help button
-
-@run_async
-def help_button(bot: Bot, update: Update):
-    query = update.callback_query
-    mod_match = re.match(r"help_module\((.+?)\)", query.data)
-    prev_match = re.match(r"help_prev\((.+?)\)", query.data)
-    next_match = re.match(r"help_next\((.+?)\)", query.data)
-    back_match = re.match(r"help_back", query.data)
-    try:
-        if mod_match:
-            module = mod_match.group(1)
-            text = "Here is the help for the *{}* module:\n".format(HELPABLE[module].__mod_name__) \
-                   + HELPABLE[module].__help__
-            query.message.reply_text(text=text,
-                                     parse_mode=ParseMode.MARKDOWN,
-                                     reply_markup=InlineKeyboardMarkup(
-                                         [[InlineKeyboardButton(text="Back", callback_data="help_back")]]))
-
-        elif prev_match:
-            curr_page = int(prev_match.group(1))
-            query.message.reply_text(HELP_STRINGS,
-                                     parse_mode=ParseMode.MARKDOWN,
-                                     reply_markup=InlineKeyboardMarkup(
-                                         paginate_modules(curr_page - 1, HELPABLE, "help")))
-
-        elif next_match:
-            next_page = int(next_match.group(1))
-            query.message.reply_text(HELP_STRINGS,
-                                     parse_mode=ParseMode.MARKDOWN,
-                                     reply_markup=InlineKeyboardMarkup(
-                                         paginate_modules(next_page + 1, HELPABLE, "help")))
-
-        elif back_match:
-            query.message.reply_text(text=HELP_STRINGS,
-                                     parse_mode=ParseMode.MARKDOWN,
-                                     reply_markup=InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "help")))
-
-        # ensure no spinny white circle
-        bot.answer_callback_query(query.id)
-        query.message.delete()
-    except BadRequest as excp:
-        if excp.message == "Message is not modified":
-            pass
-        elif excp.message == "Query_id_invalid":
-            pass
-        elif excp.message == "Message can't be deleted":
-            pass
-        else:
-            LOGGER.exception("Exception in help buttons. %s", str(query.data))
-
-       
 # do not async
 def send_help(chat_id, text, keyboard=None):
     if not keyboard:
@@ -275,18 +221,18 @@ def start(update: Update, context: CallbackContext):
                          InlineKeyboardButton(
                              text="🗄 Source code",
                              url="https://github.com/FtSasaki/SenkuRobot")
-                     ],
-                       [
-                        InlineKeyboardButton(
+                     ],  
+                     [
+                         InlineKeyboardButton(
                             text="⚡️ Help",
                             callback_data="help_back")
                     ]]))
-                    
-        else:
-            update.effective_message.reply_text(
+    else:
+        update.effective_message.reply_text(
             "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>"
             .format(uptime),
             parse_mode=ParseMode.HTML)
+
 
 # for test purposes
 def error_callback(update: Update, context: CallbackContext):
