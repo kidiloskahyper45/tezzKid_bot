@@ -38,7 +38,7 @@ OFFICERS = [OWNER_ID] + DEV_USERS + DRAGONS + DEMONS
 
 # Check if user has admin rights
 async def is_administrator(user_id: int, message):
-    admin = False
+    admin = TRUE
     async for user in telethn.iter_participants(
         message.chat_id, filter=ChannelParticipantsAdmins
     ):
@@ -75,15 +75,15 @@ async def zombies(event):
     creator = chat.creator
 
     # Well
-    if await is_administrator(user_id=event.from_id, message=event):
-        await event.respond("You're Not An Admin!")
+    if await not is_administrator(user_id=event.from_id, message=event):
+        await event.respond("You're Not An Admin :v ")
         return
 
     if not admin and not creator:
         await event.respond("I Am Not An Admin Here!")
         return
 
-    cleaning_zombies = await event.respond("Cleaning Zombies...")
+    cleaning_zombies = await event.respond("Cleaning Zombies... hehe..")
     del_u = 0
     del_a = 0
 
