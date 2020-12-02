@@ -3,6 +3,8 @@ import time
 import re
 from sys import argv
 from typing import Optional
+#For Help Button
+from telegram import Message, Chat, Update, Bot, User
 
 from SaitamaRobot import (ALLOW_EXCL, CERT_PATH, DONATION_LINK, LOGGER,
                           OWNER_ID, PORT, SUPPORT_CHAT, TOKEN, URL, WEBHOOK,
