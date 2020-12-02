@@ -32,4 +32,12 @@ cachetools
 fontTools
 gtts
 pyrogram
-hitsuki
+redis
+nekos.py
+tswift
+pyowm
+tabulate
+parsel
+pyrogram
+tgcrypto
+
