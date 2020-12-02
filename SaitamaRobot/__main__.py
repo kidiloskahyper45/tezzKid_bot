@@ -275,8 +275,14 @@ def start(update: Update, context: CallbackContext):
                          InlineKeyboardButton(
                              text="🗄 Source code",
                              url="https://github.com/FtSasaki/SenkuRobot")
-                     ]]))
-    else:
+                     ],
+                       [
+                        InlineKeyboardButton(
+                            text="⚡️ Help",
+                            callback_data="help_back")
+                    ]]))
+                    
+        else:
         update.effective_message.reply_text(
             "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>"
             .format(uptime),
