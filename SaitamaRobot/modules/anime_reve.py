@@ -47,8 +47,7 @@ def calculate_eta(current, total, start_time):
     thing[-1] = thing[-1].rjust(8, '0')
     return ', '.join(thing)
 
-
-@pbot.on_message(filters.command('whatanime'))
+@pbot.on_message(~filters.me & filters.command('wa', prefixes='/'), group=8)
 async def whatanime(c: Client, m: Message):
     media = m.photo or m.animation or m.video or m.document
     if not media:
@@ -120,7 +119,8 @@ async def whatanime(c: Client, m: Message):
                         await reply.reply_text('Cannot send preview :/')
             await asyncio.gather(reply.edit_text(text, disable_web_page_preview=True), _send_preview())
 
-
+            
+progress_callback_data = {}
 async def progress_callback(current, total, reply):
     message_identifier = (reply.chat.id, reply.message_id)
     last_edit_time, prevtext, start_time = progress_callback_data.get(
@@ -137,11 +137,11 @@ async def progress_callback(current, total, reply):
         else:
             download_speed = '0 B'
         text = f'''Downloading...
-`{return_progress_string(current, total)}`
-
-*Total Size*: {format_bytes(total)
-*Download Speed*: {download_speed}/s
-*ETA:* {calculate_eta(current, total, start_time)}'''
+<code>{return_progress_string(current, total)}</code>
+<b>Total Size:</b> {format_bytes(total)}
+<b>Downladed Size:</b> {format_bytes(current)}
+<b>Download Speed:</b> {download_speed}/s
+<b>ETA:</b> {calculate_eta(current, total, start_time)}'''
         if prevtext != text:
             await reply.edit_text(text)
             prevtext = text
