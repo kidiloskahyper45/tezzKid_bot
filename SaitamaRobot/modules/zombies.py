@@ -75,7 +75,7 @@ async def zombies(event):
     creator = chat.creator
 
     # Well
-    if await not is_administrator(user_id=event.from_id, message=event):
+    if not await is_administrator(user_id=event.from_id, message=event):
         await event.respond("You're Not An Admin :v ")
         return
 
