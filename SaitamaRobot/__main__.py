@@ -209,13 +209,9 @@ def start(update: Update, context: CallbackContext):
                      ],
                      [
                          InlineKeyboardButton(
-                             text="🧾 Getting started guide",
+                             text="⚡️ Getting started guide",
                              url="https://t.me/SenkuUpdates/4")
-                     ],
-                     [
-                         InlineKeyboardButton(
-                            text="help",
-                            callback_data="help_back")
+                    
                      ]]))
     else:
         update.effective_message.reply_text(
