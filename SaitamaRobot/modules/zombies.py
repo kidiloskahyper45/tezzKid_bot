@@ -83,7 +83,7 @@ async def zombies(event):
         await event.respond("I Am Not An Admin Here!")
         return
 
-    cleaning_zombies = await event.respond("Cleaning Zombies... hehe..")
+    cleaning_zombies = await event.respond("Cleaning Zombies...\nhehe..")
     del_u = 0
     del_a = 0
 
