@@ -200,16 +200,11 @@ def start(update: Update, context: CallbackContext):
                 reply_markup=InlineKeyboardMarkup(
                     [[
                         InlineKeyboardButton(
-                            text="👑 Summon Senku",
+                            text="👑 Summon Me",
                             url="t.me/{}?startgroup=true".format(
-                                context.bot.username))
-                    ],
-                     [
+                                context.bot.username)),
                          InlineKeyboardButton(
-                             text="🚑 Support Area",
-                             url=f"https://t.me/{SUPPORT_CHAT}"),
-                         InlineKeyboardButton(
-                             text="🔔 Updates Channel",
+                             text="🔔 Updates",
                              url="https://t.me/SenkuUpdates")
                      ],
                      [
