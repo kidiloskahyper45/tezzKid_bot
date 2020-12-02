@@ -137,11 +137,11 @@ async def progress_callback(current, total, reply):
         else:
             download_speed = '0 B'
         text = f'''Downloading...
-<code>{return_progress_string(current, total)}</code>
+`{return_progress_string(current, total)}`
 
-<b>Total Size:</b> {format_bytes(total)
-<b>Download Speed:</b> {download_speed}/s
-<b>ETA:</b> {calculate_eta(current, total, start_time)}'''
+*Total Size*: {format_bytes(total)
+*Download Speed*: {download_speed}/s
+*ETA:* {calculate_eta(current, total, start_time)}'''
         if prevtext != text:
             await reply.edit_text(text)
             prevtext = text
