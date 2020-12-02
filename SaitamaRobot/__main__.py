@@ -282,12 +282,11 @@ def start(update: Update, context: CallbackContext):
                             callback_data="help_back")
                     ]]))
                     
-         else:
-          update.effective_message.reply_text(
+        else:
+            update.effective_message.reply_text(
             "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>"
             .format(uptime),
             parse_mode=ParseMode.HTML)
-
 
 # for test purposes
 def error_callback(update: Update, context: CallbackContext):
