@@ -31,3 +31,5 @@ pyrate-limiter
 cachetools
 fontTools
 gtts
+pyrogram
+hitsuki
