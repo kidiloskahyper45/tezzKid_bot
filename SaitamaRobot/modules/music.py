@@ -5,7 +5,7 @@ from telegram.ext import CommandHandler, run_async, Filters
 import requests, logging
 from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
 from telegram import Message, Chat, Update, Bot, MessageEntity
-from SaitamaRobot import dispatcher, OWNER_ID, DEAMONS, DRAGONS, WOLVES
+from SaitamaRobot import dispatcher, OWNER_ID, DEMONS, DRAGONS, WOLVES
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from SaitamaRobot.modules.helper_funcs.chat_status import user_admin
 
