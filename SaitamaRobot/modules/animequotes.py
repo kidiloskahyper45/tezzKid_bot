@@ -18,7 +18,7 @@ def animequotes(update: Update, context: CallbackContext):
 __mod_name__ = "Anime Quotes"
 
 __help__ = """
- • `animequotes` *:* Random Anime Motivational Quotes
+ • `/animequotes` *:* Random Anime Motivational Quotes
  
 """
 
