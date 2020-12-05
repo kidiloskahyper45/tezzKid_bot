@@ -1,81 +1,86 @@
-import html
-import time
-import datetime
-from telegram.ext import CommandHandler, run_async, Filters
-import requests, logging
-from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
-from telegram import Message, Chat, Update, Bot, MessageEntity
-from SaitamaRobot import dispatcher, OWNER_ID, DEMONS, DRAGONS, WOLVES
-from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
-from SaitamaRobot.modules.helper_funcs.chat_status import user_admin
 
-count = 0
-@run_async
-def music(bot: Bot, update: Update, args):
-	message = update.effective_message
-	global count
-
-	chatId = update.message.chat_id
-    
-	video_id = ''.join(args)
-
-	if video_id.find('youtu.be') != -1:
-		index = video_id.rfind('/') + 1
-		video_id = video_id[index:][:11]
-		message.reply_text("Please wait...\ndownloading audio.")
-
-	elif video_id.find('youtube') != -1:
-		index = video_id.rfind('?v=') + 3
-		video_id = video_id[index:][:11]
-		message.reply_text("Please wait...\downloading audio.")
-
-	elif not video_id.find('youtube') != -1:
-		message.reply_text("Please provide me youtube link")
-
-	elif not video_id.find('youtu.be') != -1:
-		message.reply_text("Please provide me youtube link")
-		
-
-        
+from telegram.ext import Updater, MessageHandler, Filters, Handler
+from telegram import Bot
+import json
+import logging
+import os
 
 
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                     level=logging.INFO)
 
-	r = requests.get(f'https://api.pointmp3.com/dl/{video_id}?format=mp3')
-	
-
-	json1_response = r.json()
-
-	if not json1_response['error']:
-		
-
-		redirect_link = json1_response['url']
-
-		r = requests.get(redirect_link)
-		
-
-		json2_response = r.json()
-
-		if not json2_response['error']:
-			payload = json2_response['payload']
-
-			info = '*{0}* \nUploaded by @SenkuSupport'.format(payload['fulltitle'])
-
-			try:
-				
-				bot.send_audio(chat_id=chatId, audio=json2_response['url'] ,parse_mode='Markdown',text="meanya", caption=info)
-				count += 1
-				print("\033[1m\033[96m" + "Download count: " + str(count) + "\033[0m")
-			except:
-				bot.send_message(chat_id=chatId, text='Something went wrong with the download..!\nPlease Report there @SenkuSupport')
+with open("sasaki.json", "r") as read_file:
+    config = json.load(read_file)
 
 
-__help__ = """ Youtube audio Downloader
- - /music <Youtube link> : download audio file from youtube link.
-
-"""
-__mod_name__ = "MP3 DOWNLOADER" 
-
-music_handler = CommandHandler('music', music, pass_args=True)
-dispatcher.add_handler(music_handler)
+def update_config():
+    with open("config.json", "w") as write_file:
+        json.dump(config, write_file)
 
 
+updater = Updater(config["TOKEN"])
+dispatcher = updater.dispatcher
+
+
+def get_single_song_handler(bot, update):
+    if config["AUTH"]["ENABLE"]:
+        authenticate(bot, update)
+    get_single_song(bot, update)
+
+
+def get_single_song(bot, update):
+    chat_id = update.effective_message.chat_id
+    message_id = update.effective_message.message_id
+    username = update.message.chat.username
+    logging.log(logging.INFO, f'start to query message {message_id} in chat:{chat_id} from {username}')
+
+    url = "'" + update.effective_message.text + "'"
+
+    os.system(f'mkdir -p .temp{message_id}{chat_id}')
+    os.chdir(f'./.temp{message_id}{chat_id}')
+
+    logging.log(logging.INFO, f'start downloading')
+    bot.send_message(chat_id=chat_id, text="Fetching...")
+    os.system(f'spotdl {url}')
+
+    logging.log(logging.INFO, 'sending to client')
+
+    sent = 0 
+    bot.send_message(chat_id=chat_id, text="Sending to You...")
+    for file in os.listdir("."):
+        if file.endswith(".mp3"):
+            bot.send_audio(chat_id=chat_id, audio=open(f'./{file}', 'rb'), timeout=1000)
+            sent += 1
+
+    os.chdir('./..')
+    os.system(f'rm -rf .temp{message_id}{chat_id}')
+
+    if sent == 0:
+       bot.send_message(chat_id=chat_id, text="It seems there was a problem in finding/sending the song.")
+       raise Exception("dl Failed")
+    else:
+        logging.log(logging.INFO, 'sent')
+
+
+
+def authenticate(bot, update):
+    username = update.message.chat.username
+    chat_id = update.effective_message.chat_id
+    if update.effective_message.text == config["AUTH"]["PASSWORD"]:
+        logging.log(logging.INFO, f'new sign in for user {username}, {chat_id}')
+        config["AUTH"]["USERS"].append(chat_id)
+        update_config()
+        bot.send_message(chat_id=chat_id, text="You signed in successfully. Enjoy🍻")
+        raise Exception("Signed In")
+    elif chat_id not in config["AUTH"]["USERS"]:
+        logging.log(logging.INFO, f'not authenticated try')
+        bot.send_message(chat_id=chat_id, text="⚠️This bot is personal and you are not signed in. Please enter the "
+                                               "password to sign in. If you don't know it contact the bot owner. ")
+        raise Exception("Not Signed In")
+
+
+handler = MessageHandler(Filters.text, get_single_song_handler)
+dispatcher.add_handler(handler=handler)
+POLLING_INTERVAL = 0.8
+updater.start_polling(poll_interval=POLLING_INTERVAL)
+updater.idle()
