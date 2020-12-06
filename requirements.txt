@@ -47,4 +47,3 @@ pybase64
 pySmartDL
 validators
 youtube_dl
-git+https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git
