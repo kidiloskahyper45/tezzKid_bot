@@ -42,3 +42,4 @@ pyrogram
 tgcrypto
 telegraph
 pytz
+hachoir
