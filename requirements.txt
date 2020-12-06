@@ -47,4 +47,5 @@ pybase64
 pySmartDL
 validators
 youtube_dl
-ffprobe/avprobe
+ffprobe
+avprobe
