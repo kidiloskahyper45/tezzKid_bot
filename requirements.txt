@@ -43,3 +43,4 @@ tgcrypto
 telegraph
 pytz
 hachoir
+pybase64
