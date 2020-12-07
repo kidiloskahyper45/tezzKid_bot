@@ -183,7 +183,7 @@ def addsupport(
         data = json.load(infile)
 
     if user_id in DRAGONS:
-        rt += "Requested HA to deomote this Dragon to Demon"
+        rt += "Requested HA to demote this Dragon to Demon"
         data['sudos'].remove(user_id)
         DRAGONS.remove(user_id)
 
@@ -652,12 +652,15 @@ Group admins/group owners do not need these commands.
 
  ╔ *Groups Info:*
  ╠ `/groups`*:* List the groups with Name, ID, members count as a txt
- ╚ `/getchats`*:* Gets a list of group names the user has been seen in. Bot owner only
+ ╠ `/leave <ID>`*:* Leave the group, ID must have hyphen
+ ╠ `/stats`*:* Shows overall bot stats
+ ╠ `/getchats`*:* Gets a list of group names the user has been seen in. Bot owner only
+ ╚ `/ginfo username/link/ID`*:* Pulls info panel for entire group
 
- ╔ *Blacklist:* 
+ ╔ *Access control:* 
  ╠ `/ignore`*:* Blacklists a user from 
  ╠  using the bot entirely
- ╚ `/notice`*:* Whitelists the user to allow bot usage
+ ╚ `/notice`*:* Removes user from blacklist
 
  ╔ *Speedtest:*
  ╚ `/speedtest`*:* Runs a speedtest and gives you 2 options to choose from, text or image output
@@ -678,8 +681,7 @@ Group admins/group owners do not need these commands.
  ╠ `/runban user group`*:* Remote un-ban
  ╠ `/rpunch user group`*:* Remote punch
  ╠ `/rmute user group`*:* Remote mute
- ╠ `/runmute user group`*:* Remote un-mute
- ╚ `/ginfo username/link/ID`*:* Pulls info panel for entire group
+ ╚ `/runmute user group`*:* Remote un-mute
 
  ╔ *Windows self hosted only:*
  ╠ `/reboot`*:* Restarts the bots service
@@ -692,8 +694,9 @@ Group admins/group owners do not need these commands.
  ╠ `/debug <on/off>`*:* Logs commands to updates.txt
  ╠ `/logs`*:* Run this in support group to get logs in pm
  ╠ `/eval`*:* Self explanatory
- ╠ `/sh`*:* Self explanator
- ╚ `/py`*:* Self explanatory
+ ╠ `/sh`*:* Runs shell command
+ ╠ `/shell`*:* Runs shell command
+ ╚ `/py`*:* Runs python code
 
 Visit @{SUPPORT_CHAT} for more information.
 """
