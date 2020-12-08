@@ -8,37 +8,19 @@ from telegram.ext import (run_async,
                           Filters, CommandHandler)
 
 from SaitamaRobot import dispatcher, REDIS
-
-
-from telegram import ParseMode, Update
-from telegram.error import BadRequest
-from telegram.ext import CallbackContext, CommandHandler, Filters, run_async
 from SaitamaRobot.modules.disable import DisableAbleCommandHandler
-from SaitamaRobot.modules.helper_funcs.chat_status import (bot_admin, can_pin,
-                                                           can_promote,
-                                                           connection_status,
-                                                           user_admin,
-                                                           ADMIN_CACHE)
-
-from SaitamaRobot.modules.helper_funcs.extraction import (extract_user,
-                                                          extract_user_and_text)
-from SaitamaRobot.modules.log_channel import loggable
+from SaitamaRobot.modules.helper_funcs.chat_status import (
+    bot_admin,
+    user_admin
+)
 from SaitamaRobot.modules.helper_funcs.extraction import extract_user_and_text
 from SaitamaRobot.modules.helper_funcs.alternate import typing_action
-from SaitamaRobot.modules.helper_funcs.alternate import send_message
 
 
-#keke imma do it
+
+
 @run_async
-@connection_status
-@bot_admin
-@can_promote
-@user_admin
-@loggable
-def approvel(update: Update, context: CallbackContext, args: List[str]) -> str:
-    bot = context.bot
-    args = context.args
-    
+def approvel(bot: Bot, update: Update, args: List[str]) -> str:
     chat = update.effective_chat  
     user = update.effective_user 
     message = update.effective_message
@@ -80,11 +62,8 @@ def approvel(update: Update, context: CallbackContext, args: List[str]) -> str:
 @run_async
 @bot_admin
 @user_admin
-@loggable
 @typing_action
-def approve(update: Update, context: CallbackContext, args: List[str]) -> str:
-    bot = context.bot
-    
+def approve(bot: Bot, update: Update, args: List[str]) -> str:
     chat = update.effective_chat  
     user = update.effective_user 
     message = update.effective_message
@@ -125,15 +104,10 @@ def approve(update: Update, context: CallbackContext, args: List[str]) -> str:
     
 
 @run_async
-@connection_status
 @bot_admin
 @user_admin
-@loggable
 @typing_action
-def unapprove(update: Update, context: CallbackContext, args: List[str]) -> str:
-    bot = context.bot
-    args = context.args
-    
+def unapprove(bot: Bot, update: Update, args: List[str]) -> str:
     chat = update.effective_chat  
     user = update.effective_user 
     message = update.effective_message
@@ -172,15 +146,10 @@ def unapprove(update: Update, context: CallbackContext, args: List[str]) -> str:
 
     
 @run_async
-@connection_status
 @bot_admin
 @user_admin
-@loggable
 @typing_action
-def approved(update: Update, context: CallbackContext, args: List[str]) -> str:
-    bot = context.bot
-    args = context.args
-    
+def approved(bot: Bot, update: Update, args: List[str]) -> str:
     chat = update.effective_chat 
     user = update.effective_user 
     message = update.effective_message
@@ -202,15 +171,10 @@ def approved(update: Update, context: CallbackContext, args: List[str]) -> str:
         )
 
 @run_async
-@connection_status
 @bot_admin
 @user_admin
-@loggable
 @typing_action
-def unapproveall(update: Update, context: CallbackContext, args: List[str]) -> str:
-    bot = context.bot
-    args = context.args
-    
+def unapproveall(bot: Bot, update: Update, args: List[str]) -> str:
     chat = update.effective_chat 
     user = update.effective_user 
     message = update.effective_message
@@ -229,14 +193,14 @@ __help__ = """
 Sometimes, you might trust a user not to send unwanted content.
 Maybe not enough to make them admin, but you might be ok with locks, blacklists, and antiflood not applying to them.
 
-That's what approvals are for - approve of *trustworthy* users to allow them to send 
+That's what approvals are for - approve of trustworthy users to allow them to send 
 
-Admin commands*:*
-- `/approval`*:* Check a user's approval status in this chat.
+Admin commands:
+- /approval: Check a user's approval status in this chat.
 
-Admin commands*:*
-- `/approve`*:* Approve of a user. Locks, blacklists, and antiflood won't apply to them anymore.
-- `/unapprove`*:* Unapprove of a user. They will now be subject to locks, blacklists, and antiflood again.
+Admin commands:
+- /approve: Approve of a user. Locks, blacklists, and antiflood won't apply to them anymore.
+- /unapprove: Unapprove of a user. They will now be subject to locks, blacklists, and antiflood again.
 \
 """    
 
