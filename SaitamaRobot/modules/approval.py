@@ -30,7 +30,10 @@ from SaitamaRobot.modules.helper_funcs.alternate import send_message
 @can_promote
 @user_admin
 @loggable
-def approvel(bot: Bot, update: Update, args: List[str]) -> str:
+def approvel(update: Update, context: CallbackContext, args: List[str]) -> str:
+    bot = context.bot
+    args = context.args
+    
     chat = update.effective_chat  
     user = update.effective_user 
     message = update.effective_message
@@ -75,7 +78,10 @@ def approvel(bot: Bot, update: Update, args: List[str]) -> str:
 @user_admin
 @loggable
 @typing_action
-def approve(bot: Bot, update: Update, args: List[str]) -> str:
+def approve(update: Update, context: CallbackContext, args: List[str]) -> str:
+    bot = context.bot
+    args = context.args
+    
     chat = update.effective_chat  
     user = update.effective_user 
     message = update.effective_message
@@ -121,7 +127,10 @@ def approve(bot: Bot, update: Update, args: List[str]) -> str:
 @user_admin
 @loggable
 @typing_action
-def unapprove(bot: Bot, update: Update, args: List[str]) -> str:
+def unapprove(update: Update, context: CallbackContext, args: List[str]) -> str:
+    bot = context.bot
+    args = context.args
+    
     chat = update.effective_chat  
     user = update.effective_user 
     message = update.effective_message
@@ -165,7 +174,10 @@ def unapprove(bot: Bot, update: Update, args: List[str]) -> str:
 @user_admin
 @loggable
 @typing_action
-def approved(bot: Bot, update: Update, args: List[str]) -> str:
+def approved(update: Update, context: CallbackContext, args: List[str]) -> str:
+    bot = context.bot
+    args = context.args
+    
     chat = update.effective_chat 
     user = update.effective_user 
     message = update.effective_message
@@ -192,7 +204,10 @@ def approved(bot: Bot, update: Update, args: List[str]) -> str:
 @user_admin
 @loggable
 @typing_action
-def unapproveall(bot: Bot, update: Update, args: List[str]) -> str:
+def unapproveall(update: Update, context: CallbackContext, args: List[str]) -> str:
+    bot = context.bot
+    args = context.args
+    
     chat = update.effective_chat 
     user = update.effective_user 
     message = update.effective_message
