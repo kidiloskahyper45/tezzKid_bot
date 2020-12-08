@@ -4,6 +4,9 @@ import sys
 import time
 import spamwatch
 
+#adding approval module
+from redis import StrictRedis
+
 import telegram.ext as tg
 from telethon import TelegramClient
 
@@ -166,8 +169,19 @@ else:
             "Your blacklisted chats list does not contain valid integers.")
 
 DRAGONS.add(OWNER_ID)
+
 DEV_USERS.add(OWNER_ID)
 
+#adding approval module @FtSasuke
+
+REDIS = StrictRedis.from_url(REDIS_URL,decode_responses=True)
+try:
+    REDIS.ping()
+    LOGGER.info("Your redis server is now alive!")
+except BaseException:
+    raise Exception("Your redis server is not alive, please check again.")
+
+    
 if not SPAMWATCH_API:
     sw = None
     LOGGER.warning("SpamWatch API key missing! recheck your config.")
