@@ -85,7 +85,6 @@ def approvel(update: Update, context: CallbackContext, args: List[str]) -> str:
 @typing_action
 def approve(update: Update, context: CallbackContext, args: List[str]) -> str:
     bot = context.bot
-    args = context.args
     
     chat = update.effective_chat  
     user = update.effective_user 
