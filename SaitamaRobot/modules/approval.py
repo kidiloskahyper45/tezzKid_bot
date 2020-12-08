@@ -100,8 +100,10 @@ def approve(bot: Bot, update: Update, args: List[str]) -> str:
         "{} has been approved in {}.".format(mention_html(member.user.id, member.user.first_name),
                                                                      chat.title),
         parse_mode=ParseMode.HTML)
-    
-    
+    else:
+     chat_id = str(chat.id)[1:] 
+     approve_list = list(REDIS.sunion(f'approve_list_{chat_id}'))
+     target_user = mention_html(member.user.id, member.user.first_name)
 
 @run_async
 @bot_admin
