@@ -9,17 +9,27 @@ from telegram.ext import (run_async,
 
 from SaitamaRobot import dispatcher, REDIS
 from SaitamaRobot.modules.disable import DisableAbleCommandHandler
-from SaitamaRobot.modules.helper_funcs.chat_status import (
-    bot_admin,
-    user_admin
-)
+from SaitamaRobot.modules.helper_funcs.chat_status import (bot_admin, can_pin,
+                                                           can_promote,
+                                                           connection_status,
+                                                           user_admin,
+                                                           ADMIN_CACHE)
+
+from SaitamaRobot.modules.helper_funcs.extraction import (extract_user,
+                                                          extract_user_and_text)
+from SaitamaRobot.modules.log_channel import loggable
 from SaitamaRobot.modules.helper_funcs.extraction import extract_user_and_text
 from SaitamaRobot.modules.helper_funcs.alternate import typing_action
+from SaitamaRobot.modules.helper_funcs.alternate import send_message
 
 
-
-
+#keke imma do it
 @run_async
+@connection_status
+@bot_admin
+@can_promote
+@user_admin
+@loggable
 def approvel(bot: Bot, update: Update, args: List[str]) -> str:
     chat = update.effective_chat  
     user = update.effective_user 
@@ -60,8 +70,10 @@ def approvel(bot: Bot, update: Update, args: List[str]) -> str:
 
 
 @run_async
+@connection_status
 @bot_admin
 @user_admin
+@loggable
 @typing_action
 def approve(bot: Bot, update: Update, args: List[str]) -> str:
     chat = update.effective_chat  
@@ -104,8 +116,10 @@ def approve(bot: Bot, update: Update, args: List[str]) -> str:
     
 
 @run_async
+@connection_status
 @bot_admin
 @user_admin
+@loggable
 @typing_action
 def unapprove(bot: Bot, update: Update, args: List[str]) -> str:
     chat = update.effective_chat  
@@ -146,8 +160,10 @@ def unapprove(bot: Bot, update: Update, args: List[str]) -> str:
 
     
 @run_async
+@connection_status
 @bot_admin
 @user_admin
+@loggable
 @typing_action
 def approved(bot: Bot, update: Update, args: List[str]) -> str:
     chat = update.effective_chat 
@@ -171,8 +187,10 @@ def approved(bot: Bot, update: Update, args: List[str]) -> str:
         )
 
 @run_async
+@connection_status
 @bot_admin
 @user_admin
+@loggable
 @typing_action
 def unapproveall(bot: Bot, update: Update, args: List[str]) -> str:
     chat = update.effective_chat 
