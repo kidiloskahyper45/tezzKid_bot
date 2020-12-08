@@ -78,7 +78,6 @@ def approvel(update: Update, context: CallbackContext, args: List[str]) -> str:
 
 
 @run_async
-@connection_status
 @bot_admin
 @user_admin
 @loggable
