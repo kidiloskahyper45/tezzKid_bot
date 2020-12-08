@@ -8,6 +8,11 @@ from telegram.ext import (run_async,
                           Filters, CommandHandler)
 
 from SaitamaRobot import dispatcher, REDIS
+
+
+from telegram import ParseMode, Update
+from telegram.error import BadRequest
+from telegram.ext import CallbackContext, CommandHandler, Filters, run_async
 from SaitamaRobot.modules.disable import DisableAbleCommandHandler
 from SaitamaRobot.modules.helper_funcs.chat_status import (bot_admin, can_pin,
                                                            can_promote,
