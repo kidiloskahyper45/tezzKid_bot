@@ -109,7 +109,7 @@ def kang(update: Update, context: CallbackContext):
         elif msg.reply_to_message.document:
             file_id = msg.reply_to_message.document.file_id
         else:
-            msg.reply_text("Yea, I can't kang that.")
+            msg.reply_text("Yea, I can't kang that. ")
 
         kang_file = context.bot.get_file(file_id)
         if not is_animated:
@@ -376,7 +376,7 @@ def makepack_internal(
             success = context.bot.create_new_sticker_set(
                 user.id,
                 packname,
-                f"{name}s kang pack" + extra_version,
+                f"{name}`s kang pack" + extra_version,
                 png_sticker=png_sticker,
                 emojis=emoji,
             )
@@ -384,7 +384,7 @@ def makepack_internal(
             success = context.bot.create_new_sticker_set(
                 user.id,
                 packname,
-                f"{name}s animated kang pack" + extra_version,
+                f"{name}`s animated kang pack" + extra_version,
                 tgs_sticker=tgs_sticker,
                 emojis=emoji,
             )
