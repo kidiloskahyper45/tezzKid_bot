@@ -79,7 +79,7 @@ def kang(update: Update, context: CallbackContext):
     user = update.effective_user
     args = context.args
     packnum = 0
-    packname = "a" + str(user.id) + "_by_" + context.bot.username
+    packname = str(user.name) + "`s pack by " + context.bot.username
     packname_found = 0
     max_stickers = 120
     while packname_found == 0:
