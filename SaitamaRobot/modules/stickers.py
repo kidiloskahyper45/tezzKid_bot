@@ -85,7 +85,7 @@ def addsticker(update, context):
         elif msg.reply_to_message.document:
             file_id = msg.reply_to_message.document.file_id
         else:
-            msg.reply_text("Yea, I can't kang that.")
+            msg.reply_text("Yep, I can't kang that :/")
 
         kang_file = context.bot.get_file(file_id)
         if not is_animated:
