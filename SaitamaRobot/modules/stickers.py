@@ -79,7 +79,7 @@ def kang(update: Update, context: CallbackContext):
     user = update.effective_user
     args = context.args
     packnum = 0
-    packname = "user " + str(user.id) + " pack by " + context.bot.username
+    packname = "a" + str(user.id) + "_by_" + context.bot.username
     packname_found = 0
     max_stickers = 120
     while packname_found == 0:
@@ -87,7 +87,7 @@ def kang(update: Update, context: CallbackContext):
             stickerset = context.bot.get_sticker_set(packname)
             if len(stickerset.stickers) >= max_stickers:
                 packnum += 1
-                packname = ("pack " + str(packnum) + " " + str(user.id) + " by " +
+                packname = ("a" + str(packnum) + "_" + str(user.id) + "_by_" +
                             context.bot.username)
             else:
                 packname_found = 1
@@ -109,7 +109,7 @@ def kang(update: Update, context: CallbackContext):
         elif msg.reply_to_message.document:
             file_id = msg.reply_to_message.document.file_id
         else:
-            msg.reply_text("Yea, I can't kang that. ")
+            msg.reply_text("Yea, I can't kang that.")
 
         kang_file = context.bot.get_file(file_id)
         if not is_animated:
@@ -376,7 +376,7 @@ def makepack_internal(
             success = context.bot.create_new_sticker_set(
                 user.id,
                 packname,
-                f"{name}`s kang pack" + extra_version,
+                f"{name}s kang pack" + extra_version,
                 png_sticker=png_sticker,
                 emojis=emoji,
             )
@@ -384,7 +384,7 @@ def makepack_internal(
             success = context.bot.create_new_sticker_set(
                 user.id,
                 packname,
-                f"{name}`s animated kang pack" + extra_version,
+                f"{name}s animated kang pack" + extra_version,
                 tgs_sticker=tgs_sticker,
                 emojis=emoji,
             )
