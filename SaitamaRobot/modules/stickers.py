@@ -124,11 +124,11 @@ def kang(update: Update, context: CallbackContext):
         else:
             sticker_emoji = "🤔"
             
-        adding_process = msg.reply_text(
-                    "Lemme check if I can add this sticker in ur pack, Kindly wait ..🏃",
+        adding_process = adding_process.edit_text(
+                    "Lemme check if i can add this sticker in pack, plz wait..🏃",
                     parse_mode=ParseMode.MARKDOWN,
                     )
-    
+
         if not is_animated:
             try:
                 im = Image.open(kangsticker)
@@ -166,7 +166,7 @@ def kang(update: Update, context: CallbackContext):
                             )
                         ]
                     ]
-                    )                   
+                    )
                 adding_process.edit_text(
                     f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
                     + f"\nEmoji is: {sticker_emoji}",
@@ -438,16 +438,12 @@ def makepack_internal(
         return
 
     if success:
-        adding_process = msg.reply_text(
-                        "Oi wait, I am creating new pack for you...",
-                         parse_mode=ParseMode.MARKDOWN,
-                        )
-        adding_process.edit_text(
+        msg.reply_text(
             "Sticker pack successfully created. Get it [here](t.me/addstickers/%s)"
             % packname,
             reply_markup=InlineKeyboardMarkup([[
                     InlineKeyboardButton(
-                        text="Get Now ✨", url=f"t.me/addstickers/{packname}")
+                        text="Get Now ✨", url=f"t.me/addstickers/%s")
                 ]]),
             parse_mode=ParseMode.MARKDOWN,
         )
