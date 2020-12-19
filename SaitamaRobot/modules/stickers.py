@@ -164,7 +164,7 @@ def kang(update: Update, context: CallbackContext):
                     )
                 msg.reply_text(
                     f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
-                    + f"\nEmoji is: {sticker_emoji}",
+                    + f"\nEmoji is : {sticker_emoji}",
                     reply_markup=kek_keyboard,
                     parse_mode=ParseMode.MARKDOWN,
                 )
@@ -205,7 +205,7 @@ def kang(update: Update, context: CallbackContext):
                     )
                     msg.reply_text(
                         f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
-                        + f"\nEmoji is: {sticker_emoji}",
+                        + f"\nEmoji is : {sticker_emoji}",
                         reply_markup=kek_keyboard,
                         parse_mode=ParseMode.MARKDOWN,
                     )
