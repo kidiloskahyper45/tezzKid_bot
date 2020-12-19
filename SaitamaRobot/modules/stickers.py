@@ -438,6 +438,10 @@ def makepack_internal(
         return
 
     if success:
+        adding_process = msg.reply_text(
+                        "Your sticker will be added in few seconds, please wait...",
+                         parse_mode=ParseMode.MARKDOWN,
+                        )
         adding_process.edit_text(
             "Sticker pack successfully created. Get it [here](t.me/addstickers/%s)"
             % packname,
