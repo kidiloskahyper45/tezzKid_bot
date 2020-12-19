@@ -422,15 +422,15 @@ def makepack_internal(
                 parse_mode=ParseMode.MARKDOWN,
             )
         elif e.message in ("Peer_id_invalid", "bot was blocked by the user"):
-            msg.reply_text(
-                "Contact me in PM first.",
+            adding_process.edit_text(
+                "Contact me in PM first. 🥺",
                 reply_markup=InlineKeyboardMarkup([[
                     InlineKeyboardButton(
                         text="Start", url=f"t.me/{context.bot.username}")
                 ]]),
             )
         elif e.message == "Internal Server Error: created sticker set not found (500)":
-            msg.reply_text(
+            adding_process.edit_text(
                 "Sticker pack successfully created. Get it [here](t.me/addstickers/%s)"
                 % packname,
                 parse_mode=ParseMode.MARKDOWN,
@@ -438,9 +438,13 @@ def makepack_internal(
         return
 
     if success:
-        msg.reply_text(
+        adding_process.edit_text(
             "Sticker pack successfully created. Get it [here](t.me/addstickers/%s)"
             % packname,
+            reply_markup=InlineKeyboardMarkup([[
+                    InlineKeyboardButton(
+                        text="Get Now ✨", url=f"t.me/addstickers/%s")
+                ]]),
             parse_mode=ParseMode.MARKDOWN,
         )
     else:
