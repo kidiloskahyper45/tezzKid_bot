@@ -125,10 +125,14 @@ def kang(update: Update, context: CallbackContext):
             sticker_emoji = "🤔"
             
         adding_process = msg.reply_text(
-                    "Your sticker will be added in few seconds, please wait...",
+                    "Lemme check if I can add this sticker in ur pack, Kindly wait ..🏃",
                     parse_mode=ParseMode.MARKDOWN,
                     )
-
+        adding_process.edit_text(
+                    "Still Waiting 🏃..",
+                    parse_mode=ParseMode.MARKDOWN,
+                    )
+    
         if not is_animated:
             try:
                 im = Image.open(kangsticker)
@@ -269,7 +273,6 @@ def kang(update: Update, context: CallbackContext):
                         packnum,
                         tgs_sticker=open("kangsticker.tgs", "rb"),
                     )
-                        adding_process.delete()
                 elif e.message == "Invalid sticker emojis":
                     msg.reply_text("Invalid emoji(s).")
                 elif e.message == "Internal Server Error: sticker set not found (500)":
