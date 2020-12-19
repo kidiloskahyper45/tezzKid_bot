@@ -173,7 +173,7 @@ def kang(update: Update, context: CallbackContext):
                 msg.reply_text("I can only kang images m8.")
                 print(e)
                 return
-
+            
             except TelegramError as e:
                 if e.message == "Stickerset_invalid":
                     makepack_internal(
