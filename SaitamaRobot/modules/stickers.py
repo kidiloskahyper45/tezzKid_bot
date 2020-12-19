@@ -198,7 +198,7 @@ def kang(update: Update, context: CallbackContext):
                         f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
                         + f"\nEmoji is: {sticker_emoji}",
                         parse_mode=ParseMode.MARKDOWN,
-                        )
+                    )
                 elif e.message == "Invalid sticker emojis":
                     msg.reply_text("Invalid emoji(s).")
                 elif e.message == "Stickers_too_much":
