@@ -5,7 +5,6 @@ import urllib.request as urllib
 from PIL import Image
 from html import escape
 from bs4 import BeautifulSoup as bs
-import urllib.request as urllib
 
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram import TelegramError, Update
@@ -154,20 +153,9 @@ def kang(update: Update, context: CallbackContext):
                     png_sticker=open("kangsticker.png", "rb"),
                     emojis=sticker_emoji,
                 )
-                kek_keyboard = InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton(
-                                text="View Pack ✨", url=f"t.me/addstickers/{packname}"
-                            )
-                        ]
-                    ]
-                    )
-                
                 msg.reply_text(
                     f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
                     + f"\nEmoji is: {sticker_emoji}",
-                    reply_markup=kek_keyboard,
                     parse_mode=ParseMode.MARKDOWN,
                 )
 
@@ -195,23 +183,12 @@ def kang(update: Update, context: CallbackContext):
                         name=packname,
                         png_sticker=open("kangsticker.png", "rb"),
                         emojis=sticker_emoji,
-                    ) 
-                kek_keyboard = InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton(
-                                text="View Pack ✨", url=f"t.me/addstickers/{packname}"
-                            )
-                        ]
-                    ]
                     )
-                
-                msg.reply_text(
-                    f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
-                    + f"\nEmoji is: {sticker_emoji}",
-                    reply_markup=kek_keyboard,
-                    parse_mode=ParseMode.MARKDOWN,
-               )
+                    msg.reply_text(
+                        f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
+                        + f"\nEmoji is: {sticker_emoji}",
+                        parse_mode=ParseMode.MARKDOWN,
+                    )
                 elif e.message == "Invalid sticker emojis":
                     msg.reply_text("Invalid emoji(s).")
                 elif e.message == "Stickers_too_much":
@@ -250,20 +227,9 @@ def kang(update: Update, context: CallbackContext):
                     tgs_sticker=open("kangsticker.tgs", "rb"),
                     emojis=sticker_emoji,
                 )
-                kek_keyboard = InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton(
-                                text="View Pack ✨", url=f"t.me/addstickers/{packname}"
-                            )
-                        ]
-                    ]
-                    )
-                
                 msg.reply_text(
                     f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
                     + f"\nEmoji is: {sticker_emoji}",
-                    reply_markup=kek_keyboard,
                     parse_mode=ParseMode.MARKDOWN,
                 )
             except TelegramError as e:
