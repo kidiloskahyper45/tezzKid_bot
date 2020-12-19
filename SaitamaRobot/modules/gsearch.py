@@ -3,7 +3,7 @@ import os
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
-from SaitamaRobot.events import register
+from SaitamaRobot.event import register
 from SaitamaRobot import client
 import sys
 import shutil
