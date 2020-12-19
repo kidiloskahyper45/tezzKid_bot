@@ -268,7 +268,7 @@ def kang(update: Update, context: CallbackContext):
                         packname,
                         packnum,
                         tgs_sticker=open("kangsticker.tgs", "rb"),
-                    )
+                    )                    
                 elif e.message == "Invalid sticker emojis":
                     msg.reply_text("Invalid emoji(s).")
                 elif e.message == "Internal Server Error: sticker set not found (500)":
@@ -426,7 +426,7 @@ def makepack_internal(
                 "Contact me in PM first. 🥺",
                 reply_markup=InlineKeyboardMarkup([[
                     InlineKeyboardButton(
-                        text="Start", url=f"t.me/{context.bot.username}")
+                        text="Start ✌️", url=f"t.me/{context.bot.username}")
                 ]]),
             )
         elif e.message == "Internal Server Error: created sticker set not found (500)":
@@ -438,7 +438,7 @@ def makepack_internal(
         return
 
     if success:
-        msg.reply_text(
+       adding_process.edit_text(
             "Sticker pack successfully created. Get it [here](t.me/addstickers/%s)"
             % packname,
             reply_markup=InlineKeyboardMarkup([[
