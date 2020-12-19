@@ -128,10 +128,6 @@ def kang(update: Update, context: CallbackContext):
                     "Lemme check if I can add this sticker in ur pack, Kindly wait ..🏃",
                     parse_mode=ParseMode.MARKDOWN,
                     )
-        adding_process.edit_text(
-                    "Still Waiting 🏃..",
-                    parse_mode=ParseMode.MARKDOWN,
-                    )
     
         if not is_animated:
             try:
@@ -170,7 +166,7 @@ def kang(update: Update, context: CallbackContext):
                             )
                         ]
                     ]
-                    )
+                    )                   
                 adding_process.edit_text(
                     f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
                     + f"\nEmoji is: {sticker_emoji}",
