@@ -1,3 +1,5 @@
+import time
+
 import os
 import math
 import requests
@@ -124,7 +126,7 @@ def kang(update: Update, context: CallbackContext):
         else:
             sticker_emoji = "🤔"
             
-        adding_process = adding_process.edit_text(
+        adding_process = msg.reply_text(
                     "Lemme check if i can add this sticker in pack, plz wait..🏃",
                     parse_mode=ParseMode.MARKDOWN,
                     )
