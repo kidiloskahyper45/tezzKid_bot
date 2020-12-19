@@ -123,6 +123,11 @@ def kang(update: Update, context: CallbackContext):
             sticker_emoji = msg.reply_to_message.sticker.emoji
         else:
             sticker_emoji = "🤔"
+            
+        adding_process = msg.reply_text(
+                    "<b>Your sticker will be added in few seconds, please wait...</b>",
+                    parse_mode=ParseMode.HTML
+                    )
 
         if not is_animated:
             try:
@@ -162,7 +167,7 @@ def kang(update: Update, context: CallbackContext):
                         ]
                     ]
                     )
-                msg.reply_text(
+               adding_process.edit_text(
                     f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
                     + f"\nEmoji is: {sticker_emoji}",
                     reply_markup=kek_keyboard,
