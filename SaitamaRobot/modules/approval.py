@@ -1,9 +1,8 @@
 import html
-from typing import List
 from telegram import Chat, User, ParseMode
 from telegram.error import BadRequest
 from telegram.utils.helpers import mention_html
-from telegram import ParseMode , Bot, Update
+from telegram import ParseMode
 from telegram.ext import (run_async,
                           Filters, CommandHandler)
 
@@ -18,12 +17,13 @@ from SaitamaRobot.modules.helper_funcs.alternate import typing_action
 
 
 
-
 @run_async
-def approvel(bot: Bot, update: Update, args: List[str]) -> str:
+@typing_action
+def approval(update, context):
     chat = update.effective_chat  
     user = update.effective_user 
     message = update.effective_message
+    args = context.args 
     user_id, reason = extract_user_and_text(message, args)
     if not user_id:
         message.reply_text("You don't seem to be referring to a user.")
@@ -36,7 +36,7 @@ def approvel(bot: Bot, update: Update, args: List[str]) -> str:
             return 
         else:
             raise
-    if user_id == bot.id:
+    if user_id == context.bot.id:
         message.reply_text("How I supposed to approve myself")
         return 
     
@@ -45,7 +45,7 @@ def approvel(bot: Bot, update: Update, args: List[str]) -> str:
     target_user = mention_html(member.user.id, member.user.first_name)
     if target_user in approve_list:
         message.reply_text(
-            "{} is an approved user. Locks, antiflood, and blocklists won't apply to them.".format(mention_html(member.user.id, member.user.first_name)),                                              
+            "{} is an approved user. Auto Warns, antiflood, and blocklists won't apply to them.".format(mention_html(member.user.id, member.user.first_name)),                                              
             parse_mode=ParseMode.HTML
         )
         return
@@ -63,10 +63,11 @@ def approvel(bot: Bot, update: Update, args: List[str]) -> str:
 @bot_admin
 @user_admin
 @typing_action
-def approve(bot: Bot, update: Update, args: List[str]) -> str:
+def approve(update, context):
     chat = update.effective_chat  
     user = update.effective_user 
     message = update.effective_message
+    args = context.args 
     user_id, reason = extract_user_and_text(message, args)
     if not user_id:
         message.reply_text("You don't seem to be referring to a user.")
@@ -79,7 +80,7 @@ def approve(bot: Bot, update: Update, args: List[str]) -> str:
             return 
         else:
             raise
-    if user_id == bot.id:
+    if user_id == context.bot.id:
         message.reply_text("How I supposed to approve myself")
         return 
     
@@ -101,15 +102,17 @@ def approve(bot: Bot, update: Update, args: List[str]) -> str:
                                                                      chat.title),
         parse_mode=ParseMode.HTML)
     
+    
 
 @run_async
 @bot_admin
 @user_admin
 @typing_action
-def unapprove(bot: Bot, update: Update, args: List[str]) -> str:
+def unapprove(update, context):
     chat = update.effective_chat  
     user = update.effective_user 
     message = update.effective_message
+    args = context.args 
     user_id, reason = extract_user_and_text(message, args)
     if not user_id:
         message.reply_text("You don't seem to be referring to a user.")
@@ -122,7 +125,7 @@ def unapprove(bot: Bot, update: Update, args: List[str]) -> str:
             return 
         else:
             raise
-    if user_id == bot.id:
+    if user_id == context.bot.id:
         message.reply_text("how I supposed to approve or unapprove myself")
         return 
     chat_id = str(chat.id)[1:] 
@@ -148,7 +151,7 @@ def unapprove(bot: Bot, update: Update, args: List[str]) -> str:
 @bot_admin
 @user_admin
 @typing_action
-def approved(bot: Bot, update: Update, args: List[str]) -> str:
+def approved(update, context):
     chat = update.effective_chat 
     user = update.effective_user 
     message = update.effective_message
@@ -173,7 +176,7 @@ def approved(bot: Bot, update: Update, args: List[str]) -> str:
 @bot_admin
 @user_admin
 @typing_action
-def unapproveall(bot: Bot, update: Update, args: List[str]) -> str:
+def unapproveall(update, context):
     chat = update.effective_chat 
     user = update.effective_user 
     message = update.effective_message
@@ -190,7 +193,7 @@ __mod_name__ = "Approval"
 __help__ = """ 
 \
 Sometimes, you might trust a user not to send unwanted content.
-Maybe not enough to make them admin, but you might be ok with locks, blacklists, and antiflood not applying to them.
+Maybe not enough to make them admin, but you might be ok with auto warns, blacklists, and antiflood not applying to them.
 
 That's what approvals are for - approve of trustworthy users to allow them to send 
 
@@ -200,6 +203,8 @@ Admin commands:
 Admin commands:
 - /approve: Approve of a user. Locks, blacklists, and antiflood won't apply to them anymore.
 - /unapprove: Unapprove of a user. They will now be subject to locks, blacklists, and antiflood again.
+- /approved: List all approved users.
+- /unapproveall: Unapprove ALL users in a chat. This cannot be undone.
 \
 """    
 
@@ -207,7 +212,7 @@ APPROVED_HANDLER = DisableAbleCommandHandler("approved", approved, filters=Filte
 UNAPPROVE_ALL_HANDLER = DisableAbleCommandHandler("unapproveall", unapproveall, filters=Filters.group)
 APPROVE_HANDLER = DisableAbleCommandHandler("approve", approve, pass_args=True, filters=Filters.group)
 UNAPPROVE_HANDLER = DisableAbleCommandHandler("unapprove", unapprove, pass_args=True, filters=Filters.group)
-APPROVEL_HANDLER = DisableAbleCommandHandler("approvel", approvel, pass_args=True, filters=Filters.group)
+APPROVEL_HANDLER = DisableAbleCommandHandler("approval", approval, pass_args=True, filters=Filters.group)
 
 
 dispatcher.add_handler(APPROVED_HANDLER)
