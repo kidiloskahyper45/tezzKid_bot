@@ -153,9 +153,19 @@ def kang(update: Update, context: CallbackContext):
                     png_sticker=open("kangsticker.png", "rb"),
                     emojis=sticker_emoji,
                 )
+                kek_keyboard = InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="View Pack ✨", url=f"t.me/addstickers/{packname}"
+                                )
+                        ]
+                    ]
+                    )
                 msg.reply_text(
                     f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
                     + f"\nEmoji is: {sticker_emoji}",
+                    reply_markup=kek_keyboard,
                     parse_mode=ParseMode.MARKDOWN,
                 )
 
@@ -291,9 +301,19 @@ def kang(update: Update, context: CallbackContext):
                 png_sticker=open("kangsticker.png", "rb"),
                 emojis=sticker_emoji,
             )
+            kek_keyboard = InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="View Pack ⚡️", url=f"t.me/addstickers/{packname}"
+                                )
+                        ]
+                    ]
+                    )
             msg.reply_text(
                 f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
                 + f"\nEmoji is: {sticker_emoji}",
+                reply_markup=kek_keyboard,
                 parse_mode=ParseMode.MARKDOWN,
             )
         except OSError as e:
@@ -406,16 +426,24 @@ def makepack_internal(
             )
         elif e.message == "Internal Server Error: created sticker set not found (500)":
             msg.reply_text(
-                "Sticker pack successfully created. Get it [here](t.me/addstickers/%s)"
+                "Sticker pack successfully created. Get it [here.](t.me/addstickers/%s)"
                 % packname,
+                reply_markup=InlineKeyboardMarkup([[
+                    InlineKeyboardButton(
+                        text="Get Now 🔰", url=f"t.me/addstickers/{packname}")
+                ]]),
                 parse_mode=ParseMode.MARKDOWN,
             )
         return
 
     if success:
         msg.reply_text(
-            "Sticker pack successfully created. Get it [here](t.me/addstickers/%s)"
+            "Sticker pack successfully created. Get it [here.](t.me/addstickers/%s)"
             % packname,
+              reply_markup=InlineKeyboardMarkup([[
+                    InlineKeyboardButton(
+                        text="Get Now 🔰", url=f"t.me/addstickers/{packname}")
+                ]]),
             parse_mode=ParseMode.MARKDOWN,
         )
     else:
