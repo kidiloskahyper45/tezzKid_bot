@@ -55,7 +55,7 @@ def cb_sticker(update: Update, context: CallbackContext):
     for result, title in zip(results, titles):
         link = result['href']
         reply += f"\n• [{title.get_text()}]({link})"
-    msg.reply_text(reply, parse_mode=ParseMode.MARKDOWN)
+    adding_process.edit_text(reply, parse_mode=ParseMode.MARKDOWN)
 
 
 def getsticker(update: Update, context: CallbackContext):
@@ -124,7 +124,7 @@ def kang(update: Update, context: CallbackContext):
         else:
             sticker_emoji = "🤔"
             
-        adding_process = msg.reply_text(
+        adding_process = adding_process.edit_text(
                     "Your sticker will be added in few seconds, please wait...",
                     parse_mode=ParseMode.MARKDOWN,
                     )
@@ -199,7 +199,7 @@ def kang(update: Update, context: CallbackContext):
                         png_sticker=open("kangsticker.png", "rb"),
                         emojis=sticker_emoji,
                     )
-                    msg.reply_text(
+                    adding_process.edit_text(
                         f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
                         + f"\nEmoji is: {sticker_emoji}",
                         parse_mode=ParseMode.MARKDOWN,
@@ -207,10 +207,10 @@ def kang(update: Update, context: CallbackContext):
                 elif e.message == "Invalid sticker emojis":
                     msg.reply_text("Invalid emoji(s).")
                 elif e.message == "Stickers_too_much":
-                    msg.reply_text(
+                    adding_process.edit_text(
                         "Max packsize reached. Press F to pay respecc.")
                 elif e.message == "Internal Server Error: sticker set not found (500)":
-                    msg.reply_text(
+                    adding_process.edit_text(
                         "Sticker successfully added to [pack](t.me/addstickers/%s)"
                         % packname + "\n"
                         "Emoji is:" + " " + sticker_emoji,
@@ -251,7 +251,7 @@ def kang(update: Update, context: CallbackContext):
                         ]
                     ]
                     )
-                msg.reply_text(
+                adding_process.edit_text(
                     f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
                     + f"\nEmoji is: {sticker_emoji}",
                     reply_markup=kek_keyboard,
@@ -272,7 +272,7 @@ def kang(update: Update, context: CallbackContext):
                 elif e.message == "Invalid sticker emojis":
                     msg.reply_text("Invalid emoji(s).")
                 elif e.message == "Internal Server Error: sticker set not found (500)":
-                    msg.reply_text(
+                    adding_process.edit_text(
                         "Sticker successfully added to [pack](t.me/addstickers/%s)"
                         % packname + "\n"
                         "Emoji is:" + " " + sticker_emoji,
@@ -316,7 +316,7 @@ def kang(update: Update, context: CallbackContext):
                 png_sticker=open("kangsticker.png", "rb"),
                 emojis=sticker_emoji,
             )
-            msg.reply_text(
+            adding_process.edit_text(
                 f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
                 + f"\nEmoji is: {sticker_emoji}",
                 parse_mode=ParseMode.MARKDOWN,
@@ -345,7 +345,7 @@ def kang(update: Update, context: CallbackContext):
                     png_sticker=open("kangsticker.png", "rb"),
                     emojis=sticker_emoji,
                 )
-                msg.reply_text(
+                adding_process.edit_text(
                     "Sticker successfully added to [pack](t.me/addstickers/%s)"
                     % packname + "\n" + "Emoji is:" + " " + sticker_emoji,
                     parse_mode=ParseMode.MARKDOWN,
@@ -355,7 +355,7 @@ def kang(update: Update, context: CallbackContext):
             elif e.message == "Stickers_too_much":
                 msg.reply_text("Max packsize reached. Press F to pay respecc.")
             elif e.message == "Internal Server Error: sticker set not found (500)":
-                msg.reply_text(
+                adding_process.edit_text(
                     "Sticker successfully added to [pack](t.me/addstickers/%s)"
                     % packname + "\n"
                     "Emoji is:" + " " + sticker_emoji,
@@ -373,7 +373,7 @@ def kang(update: Update, context: CallbackContext):
                     packs += f"[pack{i}](t.me/addstickers/{packname})\n"
         else:
             packs += f"[pack](t.me/addstickers/{packname})"
-        msg.reply_text(packs, parse_mode=ParseMode.MARKDOWN)
+        adding_process.edit_text(packs, parse_mode=ParseMode.MARKDOWN)
     if os.path.isfile("kangsticker.png"):
         os.remove("kangsticker.png")
     elif os.path.isfile("kangsticker.tgs"):
@@ -417,7 +417,7 @@ def makepack_internal(
     except TelegramError as e:
         print(e)
         if e.message == "Sticker set name is already occupied":
-            msg.reply_text(
+            adding_process.edit_text(
                 "Your pack can be found [here](t.me/addstickers/%s)" % packname,
                 parse_mode=ParseMode.MARKDOWN,
             )
@@ -448,7 +448,7 @@ def makepack_internal(
             parse_mode=ParseMode.MARKDOWN,
         )
     else:
-        msg.reply_text(
+        adding_process.edit_text(
             "Failed to create sticker pack. Possibly due to blek mejik.")
 
 
