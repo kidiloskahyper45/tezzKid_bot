@@ -153,9 +153,19 @@ def kang(update: Update, context: CallbackContext):
                     png_sticker=open("kangsticker.png", "rb"),
                     emojis=sticker_emoji,
                 )
+                kek_keyboard = InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="View Pack ✨", url=f"t.me/addstickers/{packname}"
+                            )
+                        ]
+                    ]
+                    )
                 msg.reply_text(
                     f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
                     + f"\nEmoji is: {sticker_emoji}",
+                    reply_markup=kek_keyboard,
                     parse_mode=ParseMode.MARKDOWN,
                 )
 
