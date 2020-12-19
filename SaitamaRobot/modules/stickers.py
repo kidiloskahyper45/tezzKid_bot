@@ -124,7 +124,7 @@ def kang(update: Update, context: CallbackContext):
         else:
             sticker_emoji = "🤔"
             
-        adding_process = adding_process.edit_text(
+        adding_process = msg.reply_text(
                     "Your sticker will be added in few seconds, please wait...",
                     parse_mode=ParseMode.MARKDOWN,
                     )
