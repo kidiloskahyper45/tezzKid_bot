@@ -161,8 +161,7 @@ def kang(update: Update, context: CallbackContext):
                                 text="View Pack ✨", url=f"t.me/addstickers/{packname}"
                             )
                         ]
-                    ]
-                    )
+                    ])
                 
                 msg.reply_text(
                     f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
