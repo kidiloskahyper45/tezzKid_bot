@@ -194,19 +194,9 @@ def kang(update: Update, context: CallbackContext):
                         png_sticker=open("kangsticker.png", "rb"),
                         emojis=sticker_emoji,
                     )
-                kek_keyboard = InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton(
-                                text="View Pack ✨", url=f"t.me/addstickers/{packname}"
-                            )
-                        ]
-                    ]
-                    )
                 msg.reply_text(
                         f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
                         + f"\nEmoji is: {sticker_emoji}",
-                        reply_markup=kek_keyboard,
                         parse_mode=ParseMode.MARKDOWN,
                         )
                 elif e.message == "Invalid sticker emojis":
@@ -220,7 +210,7 @@ def kang(update: Update, context: CallbackContext):
                         % packname + "\n"
                         "Emoji is:" + " " + sticker_emoji,
                         parse_mode=ParseMode.MARKDOWN,
-                    )
+                        )
                 print(e)
 
         else:
@@ -247,7 +237,7 @@ def kang(update: Update, context: CallbackContext):
                     tgs_sticker=open("kangsticker.tgs", "rb"),
                     emojis=sticker_emoji,
                 )
-                kek_keyboard = InlineKeyboardMarkup(
+                 kek_keyboard = InlineKeyboardMarkup(
                     [
                         [
                             InlineKeyboardButton(
@@ -261,7 +251,7 @@ def kang(update: Update, context: CallbackContext):
                     + f"\nEmoji is: {sticker_emoji}",
                     reply_markup=kek_keyboard,
                     parse_mode=ParseMode.MARKDOWN,
-                )
+                    )
             except TelegramError as e:
                 if e.message == "Stickerset_invalid":
                     makepack_internal(
@@ -321,7 +311,7 @@ def kang(update: Update, context: CallbackContext):
                 png_sticker=open("kangsticker.png", "rb"),
                 emojis=sticker_emoji,
             )
-            kek_keyboard = InlineKeyboardMarkup(
+             kek_keyboard = InlineKeyboardMarkup(
                 [
                     [
                         InlineKeyboardButton(
@@ -335,7 +325,7 @@ def kang(update: Update, context: CallbackContext):
                 + f"\nEmoji is: {sticker_emoji}",
                 reply_markup=kek_keyboard,
                 parse_mode=ParseMode.MARKDOWN,
-            )
+                )
         except OSError as e:
             msg.reply_text("I can only kang images m8.")
             print(e)
