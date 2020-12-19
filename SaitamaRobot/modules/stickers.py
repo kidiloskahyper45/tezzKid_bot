@@ -5,6 +5,8 @@ import urllib.request as urllib
 from PIL import Image
 from html import escape
 from bs4 import BeautifulSoup as bs
+import urllib.request as urllib
+
 
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram import TelegramError, Update
@@ -153,14 +155,25 @@ def kang(update: Update, context: CallbackContext):
                     png_sticker=open("kangsticker.png", "rb"),
                     emojis=sticker_emoji,
                 )
+                kek_keyboard = InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="View Pack", url=f"t.me/addstickers/{packname}"
+                            )
+                        ]
+                    ]
+                    )
+    
                 msg.reply_text(
                     f"Sticker successfully added to [pack](t.me/addstickers/{packname})"
                     + f"\nEmoji is: {sticker_emoji}",
+                    reply_markup=kek_keyboard,              
                     parse_mode=ParseMode.MARKDOWN,
                 )
 
             except OSError as e:
-                msg.reply_text("I can only kang images m8.")
+                msg.reply_text("I can only kang images m8 :/")
                 print(e)
                 return
 
