@@ -104,9 +104,8 @@ def warn(user: User,
             keyboard[0].append(
                 InlineKeyboardButton("⚠️ Rules",
                                      url="t.me/{}?start={}".format(
-                                         bot.username, chat.id))
-        )
-
+                                         bot.username, chat.id)))
+          
         reply = (
             f"<code>❕</code><b>Warn Event</b>\n"
             f"<code> </code><b>•  User:</b> {mention_html(user.id, user.first_name)}\n"
