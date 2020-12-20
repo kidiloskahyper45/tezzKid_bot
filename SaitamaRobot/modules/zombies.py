@@ -92,7 +92,7 @@ async def zombies(event):
     async for user in event.client.iter_participants(event.chat_id):
         if user.deleted:
             try:
-                await event.telethn(
+                await event.client(
                     EditBannedRequest(event.chat_id, user.id, BANNED_RIGHTS)
                 )
             except ChatAdminRequiredError:
