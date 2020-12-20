@@ -92,18 +92,25 @@ def warn(user: User,
                       f"<b>User:</b> {mention_html(user.id, user.first_name)}\n"
                       f"<b>Reason:</b> {reason}\n"
                       f"<b>Counts:</b> <code>{num_warns}/{limit}</code>")
+        
+    rules = rules_sql.get_rules(chat.id)
+    
+    elif rules:
+        keyboard = InlineKeyboardMarkup([[
+            InlineKeyboardButton(
+                "🔘 Remove Warn", callback_data="rm_warn({})".format(user.id)),
+                         InlineKeyboardButton(
+                             text=" ⚠️ Rules ",
+                             url="t.me/{}?start={}".format(
+                                        bot.username, chat.id")
+            ]]  
 
     else:
         keyboard = InlineKeyboardMarkup([[
             InlineKeyboardButton(
                 "🔘 Remove Warn", callback_data="rm_warn({})".format(user.id))
         ]]
-        rules = rules_sql.get_rules(chat.id)
 
-          if rules:
-           keyboard[0].append(InlineKeyboardButton("⚠️ Rules",
-                                    url="t.me/{}?start={}".format(
-                                        bot.username, chat.id)))
       
         reply = (
             f"<code>❕</code><b>Warn Event</b>\n"
