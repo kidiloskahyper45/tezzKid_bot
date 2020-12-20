@@ -186,7 +186,7 @@ finally:
    REDIS.ping()
    LOGGER.info("Your redis server is now alive!")
 
-pbot = Client("senkuPyro", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
+pbot = Client("saberPyro", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
    
     
 if not SPAMWATCH_API:
