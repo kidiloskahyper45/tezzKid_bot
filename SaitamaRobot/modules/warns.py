@@ -3,7 +3,6 @@ import re
 from typing import Optional
 
 import telegram
-import SaitamaRobot.modules.sql.rules_sql as rules_sql
 from SaitamaRobot import TIGERS, WOLVES, dispatcher
 from SaitamaRobot.modules.disable import DisableAbleCommandHandler
 from SaitamaRobot.modules.helper_funcs.chat_status import (bot_admin,
@@ -19,8 +18,6 @@ from SaitamaRobot.modules.helper_funcs.misc import split_message
 from SaitamaRobot.modules.helper_funcs.string_handling import split_quotes
 from SaitamaRobot.modules.log_channel import loggable
 from SaitamaRobot.modules.sql import warns_sql as sql
-from SaitamaRobot.modules.rules import send_rules
-
 from telegram import (CallbackQuery, Chat, InlineKeyboardButton,
                       InlineKeyboardMarkup, Message, ParseMode, Update, User)
 from telegram.error import BadRequest
@@ -32,8 +29,6 @@ from telegram.utils.helpers import mention_html
 WARN_HANDLER_GROUP = 9
 CURRENT_WARNING_FILTER_STRING = "<b>Current warning filters in this chat:</b>\n"
 
-#for scrapping rules 
-rules = rules_sql.get_rules(chat.id)
 
 # Not async
 def warn(user: User,
@@ -101,9 +96,7 @@ def warn(user: User,
     else:
         keyboard = InlineKeyboardMarkup([[
             InlineKeyboardButton(
-                "🔘 Remove warn", callback_data="rm_warn({})".format(user.id)),
-            InlineKeyboardButton(text="Rules ⚠️",
-                                 url="t.me/{}?start={}".format(bot.username, chat.id)))
+                "🔘 Remove warn", callback_data="rm_warn({})".format(user.id))
         ]])
 
         reply = (
