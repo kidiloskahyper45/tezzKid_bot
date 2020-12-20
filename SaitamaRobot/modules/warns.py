@@ -3,6 +3,7 @@ import re
 from typing import Optional
 
 import telegram
+import SaitamaRobot.modules.sql.rules_sql as rules_sql
 from SaitamaRobot import TIGERS, WOLVES, dispatcher
 from SaitamaRobot.modules.disable import DisableAbleCommandHandler
 from SaitamaRobot.modules.helper_funcs.chat_status import (bot_admin,
