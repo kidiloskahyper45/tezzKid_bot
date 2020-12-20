@@ -32,6 +32,8 @@ from telegram.utils.helpers import mention_html
 WARN_HANDLER_GROUP = 9
 CURRENT_WARNING_FILTER_STRING = "<b>Current warning filters in this chat:</b>\n"
 
+#for scrapping rules 
+rules = rules_sql.get_rules(chat.id)
 
 # Not async
 def warn(user: User,
@@ -99,14 +101,10 @@ def warn(user: User,
     else:
         keyboard = InlineKeyboardMarkup([[
             InlineKeyboardButton(
-                "🔘 Remove warn", callback_data="rm_warn({})".format(user.id))
+                "🔘 Remove warn", callback_data="rm_warn({})".format(user.id)),
+            InlineKeyboardButton(text="Rules ⚠️",
+                                 url="t.me/{}?start={}".format(bot.username, chat.id)))
         ]])
-        rules = rules_sql.get_rules(chat.id)
-
-        if rules:
-            keyboard.append(InlineKeyboardButton(
-                                     text="Rules ⚠️",
-                                     url="t.me/{}?start={}".format(bot.username, chat.id)))
 
         reply = (
             f"<code>❕</code><b>Warn Event</b>\n"
