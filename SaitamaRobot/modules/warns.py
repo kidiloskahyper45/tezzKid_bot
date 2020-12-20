@@ -98,6 +98,13 @@ def warn(user: User,
             InlineKeyboardButton(
                 "🔘 Remove warn", callback_data="rm_warn({})".format(user.id))
         ]])
+        rules = rules_sql.get_rules(chat.id)
+
+        if rules:
+            keyboard[0].append(
+                InlineKeyboardButton("⚠️ Rules",
+                                     url="t.me/{}?start={}".format(
+                                         bot.username, chat.id)))
 
         reply = (
             f"<code>❕</code><b>Warn Event</b>\n"
