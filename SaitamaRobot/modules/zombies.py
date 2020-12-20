@@ -1,7 +1,7 @@
 import asyncio
 from asyncio import sleep
 
-from telethon import events
+from telethon import event
 from telethon.errors import ChatAdminRequiredError, UserAdminInvalidError
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights, ChannelParticipantsAdmins
