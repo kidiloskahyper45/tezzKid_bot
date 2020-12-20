@@ -1,6 +1,7 @@
 import html
 import random
 import time
+import requests
 
 import SaitamaRobot.modules.fun_strings as fun_strings
 from SaitamaRobot import dispatcher
