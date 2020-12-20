@@ -104,7 +104,7 @@ def warn(user: User,
         rules = rules_sql.get_rules(chat.id)
 
         if rules:
-            keyboard[1].append(
+            keyboard.append(
                 InlineKeyboardButton(text="Rules ⚠️",
                                      url="t.me/{}?start={}".format(bot.username, chat.id)))
 
