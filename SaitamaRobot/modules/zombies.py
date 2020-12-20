@@ -101,7 +101,7 @@ async def zombies(event):
             except UserAdminInvalidError:
                 del_u -= 1
                 del_a += 1
-            await event.telethn(EditBannedRequest(event.chat_id, user.id, UNBAN_RIGHTS))
+            await event.client(EditBannedRequest(event.chat_id, user.id, UNBAN_RIGHTS))
             del_u += 1
 
     if del_u > 0:
