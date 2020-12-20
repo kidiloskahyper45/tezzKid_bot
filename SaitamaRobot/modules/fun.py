@@ -37,6 +37,18 @@ def sanitize(update: Update, context: CallbackContext):
 
 
 @run_async
+def meme(update: Update, context: CallbackContext):
+    msg = update.effective_message
+    meme = requests.get("https://meme-api.herokuapp.com/gimme/Animemes/").json()
+    image = meme.get("url")
+    caption = meme.get("title")
+    if not image:
+        msg.reply_text("No URL was received from the API!")
+        return
+    msg.reply_photo(
+                photo=image, caption=caption)
+
+@run_async
 def slap(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
     message = update.effective_message
