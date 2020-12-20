@@ -1,10 +1,16 @@
 import asyncio
 from asyncio import sleep
 
-from telethon import event
+from telethon import events
 from telethon.errors import ChatAdminRequiredError, UserAdminInvalidError
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights, ChannelParticipantsAdmins
+
+from SaitamaRobot.modules.helper_funcs.chat_status import (bot_admin, can_pin,
+                                                           can_promote,
+                                                           connection_status,
+                                                           user_admin,
+                                                           ADMIN_CACHE)
 
 from SaitamaRobot import telethn, OWNER_ID, DRAGONS, DEMONS, TIGERS
 
