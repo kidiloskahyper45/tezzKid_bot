@@ -36,7 +36,7 @@ def sanitize(update: Update, context: CallbackContext):
     reply_animation(
         random.choice(fun_strings.GIFS), caption=f'*Sanitizes {name}*')
 
-#plugin by t.me/NotThatMf
+#plugin by t.me/RCage
 @run_async
 def meme(update: Update, context: CallbackContext):
     msg = update.effective_message
