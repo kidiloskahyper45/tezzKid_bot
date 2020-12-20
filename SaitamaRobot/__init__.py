@@ -7,6 +7,8 @@ import spamwatch
 #adding approval module
 from redis import StrictRedis
 
+from pyrogram import Client, errors
+
 import telegram.ext as tg
 from telethon import TelegramClient
 
@@ -184,6 +186,9 @@ finally:
    REDIS.ping()
    LOGGER.info("Your redis server is now alive!")
 
+pbot = Client("senkuPyro", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
+   
+    
 if not SPAMWATCH_API:
     sw = None
     LOGGER.warning("SpamWatch API key missing! recheck your config.")
@@ -192,6 +197,7 @@ else:
 
 updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
 telethn = TelegramClient("saitama", API_ID, API_HASH)
+pbot = Client("senkuPyro", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 dispatcher = updater.dispatcher
 
 DRAGONS = list(DRAGONS) + list(DEV_USERS)
