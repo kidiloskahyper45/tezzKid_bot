@@ -89,7 +89,7 @@ async def zombies(event):
     del_u = 0
     del_a = 0
 
-    async for user in event.telethn.iter_participants(event.chat_id):
+    async for user in event.client.iter_participants(event.chat_id):
         if user.deleted:
             try:
                 await event.telethn(
