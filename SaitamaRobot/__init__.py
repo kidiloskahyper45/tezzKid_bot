@@ -182,9 +182,6 @@ try:
     LOGGER.info("Your redis server is now alive!")
 except BaseException:
     raise Exception("Your redis server is not alive, please check again.")
-finally:
-   REDIS.ping()
-   LOGGER.info("Your redis server is now alive!")
 
 pbot = Client("saberPyro", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
    
