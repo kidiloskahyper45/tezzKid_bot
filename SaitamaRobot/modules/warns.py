@@ -95,15 +95,15 @@ def warn(user: User,
         
     rules = rules_sql.get_rules(chat.id)
     
-    elif rules:
-        keyboard = InlineKeyboardMarkup([[
+    elif rules == True:
+          keyboard = InlineKeyboardMarkup([[
             InlineKeyboardButton(
                 "🔘 Remove Warn", callback_data="rm_warn({})".format(user.id)),
-                         InlineKeyboardButton(
-                             text=" ⚠️ Rules ",
+             InlineKeyboardButton(
+                             " ⚠️ Rules ",
                              url="t.me/{}?start={}".format(
-                                        bot.username, chat.id")
-            ]]  
+                                        bot.username, chat.id"))
+            ]] 
 
     else:
         keyboard = InlineKeyboardMarkup([[
