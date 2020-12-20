@@ -6,13 +6,7 @@ from telethon.errors import ChatAdminRequiredError, UserAdminInvalidError
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights, ChannelParticipantsAdmins
 
-from SaitamaRobot.modules.helper_funcs.chat_status import (bot_admin, can_pin,
-                                                           can_promote,
-                                                           connection_status,
-                                                           user_admin,
-                                                           ADMIN_CACHE)
-
-from SaitamaRobot import telethn, OWNER_ID, DRAGONS, DEMONS, TIGERS
+from SaitamaRobot import telethn, OWNER_ID, DEV_USERS, DRAGONS, TIGERS
 
 # =================== CONSTANT ===================
 
@@ -40,12 +34,12 @@ UNBAN_RIGHTS = ChatBannedRights(
     embed_links=None,
 )
 
-OFFICERS = [OWNER_ID] + DRAGONS + DEMONS + TIGERS
+OFFICERS = [OWNER_ID] + DEV_USERS + DRAGONS + TIGERS
 
 # Check if user has admin rights
 async def is_administrator(user_id: int, message):
     admin = False
-    async for user in telethn.iter_participants(
+    async for user in client.iter_participants(
         message.chat_id, filter=ChannelParticipantsAdmins
     ):
         if user_id == user.id or user_id in OFFICERS:
@@ -65,7 +59,7 @@ async def zombies(event):
 
     if con != "clean":
         find_zombies = await event.respond("Searching For Zombies...")
-        async for user in event.telethn(iter_participants(event.chat_id)):
+        async for user in event.client.iter_participants(event.chat_id):
 
             if user.deleted:
                 del_u += 1
@@ -94,10 +88,10 @@ async def zombies(event):
     del_u = 0
     del_a = 0
 
-    async for user in event.telethn.iter_participants(event.chat_id):
+    async for user in event.client.iter_participants(event.chat_id):
         if user.deleted:
             try:
-                await event.telethn(
+                await event.client(
                     EditBannedRequest(event.chat_id, user.id, BANNED_RIGHTS)
                 )
             except ChatAdminRequiredError:
@@ -106,7 +100,7 @@ async def zombies(event):
             except UserAdminInvalidError:
                 del_u -= 1
                 del_a += 1
-            await event.telethn(EditBannedRequest(event.chat_id, user.id, UNBAN_RIGHTS))
+            await event.client(EditBannedRequest(event.chat_id, user.id, UNBAN_RIGHTS))
             del_u += 1
 
     if del_u > 0:
@@ -117,5 +111,3 @@ async def zombies(event):
         \n`{del_a}` Zombie Admin Accounts Are Not Removed!"
 
     await cleaning_zombies.edit(del_status)
-
-    
