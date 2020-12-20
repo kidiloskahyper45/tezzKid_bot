@@ -36,7 +36,7 @@ def sanitize(update: Update, context: CallbackContext):
     reply_animation(
         random.choice(fun_strings.GIFS), caption=f'*Sanitizes {name}*')
 
-
+#plugin by t.me/NotThatMf
 @run_async
 def meme(update: Update, context: CallbackContext):
     msg = update.effective_message
@@ -271,7 +271,7 @@ __help__ = """
  • `/pat`*:* pats a user, or get patted
  • `/8ball`*:* predicts using 8ball method
  • `/google` `<text query>` *:* search google queries
-
+ • `/meme`*:* sends a random meme form reddit `r/animemes`
 """
 
 MEME_HANDLER = DisableAbleCommandHandler("meme", meme)
