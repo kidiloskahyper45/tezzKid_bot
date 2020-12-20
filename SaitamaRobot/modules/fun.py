@@ -256,7 +256,9 @@ __help__ = """
  • `/weebify <text>`*:* returns a weebified text
  • `/sanitize`*:* always use this before /pat or any contact
  • `/pat`*:* pats a user, or get patted
- • `/8ball`*:* predicts using 8ball method 
+ • `/8ball`*:* predicts using 8ball method
+ • `/google` `<text query>` *:* search google queries
+
 """
 
 SANITIZE_HANDLER = DisableAbleCommandHandler("sanitize", sanitize)
