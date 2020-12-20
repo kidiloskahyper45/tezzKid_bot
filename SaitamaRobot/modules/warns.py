@@ -92,16 +92,13 @@ def warn(user: User,
                       f"<b>User:</b> {mention_html(user.id, user.first_name)}\n"
                       f"<b>Reason:</b> {reason}\n"
                       f"<b>Counts:</b> <code>{num_warns}/{limit}</code>")
-        
-    rules = rules_sql.get_rules(chat.id)
-    
+
     else:
         keyboard = InlineKeyboardMarkup([[
             InlineKeyboardButton(
-                "🔘 Remove Warn", callback_data="rm_warn({})".format(user.id))
-        ]]
+                "🔘 Remove warn", callback_data="rm_warn({})".format(user.id))
+        ]])
 
-      
         reply = (
             f"<code>❕</code><b>Warn Event</b>\n"
             f"<code> </code><b>•  User:</b> {mention_html(user.id, user.first_name)}\n"
