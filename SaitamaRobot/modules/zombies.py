@@ -59,7 +59,7 @@ async def zombies(event):
 
     if con != "clean":
         find_zombies = await event.respond("Searching For Zombies...")
-        async for user in event.telethn.iter_participants(event.chat_id):
+        async for user in event.client.iter_participants(event.chat_id):
 
             if user.deleted:
                 del_u += 1
@@ -88,10 +88,10 @@ async def zombies(event):
     del_u = 0
     del_a = 0
 
-    async for user in event.client.iter_participants(event.chat_id):
+    async for user in event.telethn.iter_participants(event.chat_id):
         if user.deleted:
             try:
-                await event.client(
+                await event.telethn(
                     EditBannedRequest(event.chat_id, user.id, BANNED_RIGHTS)
                 )
             except ChatAdminRequiredError:
@@ -100,7 +100,7 @@ async def zombies(event):
             except UserAdminInvalidError:
                 del_u -= 1
                 del_a += 1
-            await event.client(EditBannedRequest(event.chat_id, user.id, UNBAN_RIGHTS))
+            await event.telethn(EditBannedRequest(event.chat_id, user.id, UNBAN_RIGHTS))
             del_u += 1
 
     if del_u > 0:
