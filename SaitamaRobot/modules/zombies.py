@@ -65,7 +65,7 @@ async def zombies(event):
 
     if con != "clean":
         find_zombies = await event.respond("Searching For Zombies...")
-        async for user in event.telethn.iter_participants(event.chat_id):
+        async for user in event.iter_participants(event.chat_id):
 
             if user.deleted:
                 del_u += 1
