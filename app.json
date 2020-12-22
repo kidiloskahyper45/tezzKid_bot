@@ -153,14 +153,8 @@
       "description": "Make your bot talk using Intellivoid's chatbot API, get your key from https://coffeehouse.intellivoid.net/",
          "required": false,
          "value": ""
-       
-     },
-      "REDIS_URL": {
-      "description": "Make sure to Install REDIS SERVER Heroku Addon then copy-paste that value here later! Below value is dummy value :D",
-         "required": false,
-         "value": "redis://default:xyz@redis.xyz.cloud.xyz.com:1080"
-            
-   },      
+                
+      },      
       "BAN_STICKER": {
          "description": "ID of the sticker you want to use when banning people.",
          "required": false,
