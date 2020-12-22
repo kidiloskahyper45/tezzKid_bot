@@ -176,7 +176,7 @@ DEV_USERS.add(OWNER_ID)
 
 #adding approval module @FtSasuke
 
-REDIS = StrictRedis.from_url(REDIS_URL,decode_responses=True)
+REDIS = StrictRedis.from_url(REDISCLOUD_URL,decode_responses=True)
 try:
     REDIS.ping()
     LOGGER.info("Your redis server is now alive!")
