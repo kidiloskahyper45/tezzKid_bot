@@ -19,13 +19,13 @@
       },
  
       {
-    "rediscloud",
-    {
-      "plan": "mongolab:shared-single-small",
-    }
-  }
-        
-    ],
+         "options": {
+           "version": "12"
+         },
+         "plan": "rediscloud"
+       }
+      }      
+],
       
        
    "env": {
