@@ -16,13 +16,7 @@
             "version": "12"
          },
          "plan": "heroku-postgresql"
-      },
-    {
-      "plan": "rediscloud : mongolab:shared-single-small",
-      "options": {
-        "version": "12"
       }
-    }
   ],
       
    "buildpacks": [
