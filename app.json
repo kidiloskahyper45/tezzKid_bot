@@ -14,15 +14,17 @@
     "openredis",
     {
       "plan": "mongolab:shared-single-small",
+      "as": "MONGO"
     },
     {
       "plan": "heroku-postgresql",
       "options": {
-        "version": "12"
+        "version": "9.5"
       }
     }
-  ],
-}       
+  ]
+}
+
    "env": {
       "TOKEN": {
          "description": "Your bot token. Get one from @BotFather duh",
