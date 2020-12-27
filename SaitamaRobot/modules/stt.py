@@ -12,7 +12,7 @@ from telethon.tl import types
 from telethon.tl.types import *
 
 from SaitamaRobot import *
-from SaitamaRobot.events import register
+from SaitamaRobot.event import register
 
 
 async def is_register_admin(chat, user):
@@ -35,7 +35,7 @@ async def is_register_admin(chat, user):
     return False
 
 
-@telethn(pattern="^/stt$")
+@register(pattern="^/stt$")
 async def _(event):
     if event.fwd_from:
         return
