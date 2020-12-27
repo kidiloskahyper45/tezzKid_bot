@@ -75,6 +75,7 @@ if ENV:
     PORT = int(os.environ.get('PORT', 5000))
     CERT_PATH = os.environ.get("CERT_PATH")
     REDISCLOUD_URL = os.environ.get('REDISCLOUD_URL')
+    ERROR_DUMP = os.environ.get('ERROR_DUMP', None)
     API_ID = os.environ.get('API_ID', None)
     API_HASH = os.environ.get('API_HASH', None)
     DB_URI = os.environ.get('DATABASE_URL')
