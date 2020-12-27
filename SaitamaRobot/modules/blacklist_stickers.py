@@ -2,7 +2,8 @@ import html
 from typing import Optional
 
 import SaitamaRobot.modules.sql.blsticker_sql as sql
-from SaitamaRobot import LOGGER, dispatcher
+from SaitamaRobot import REDIS, LOGGER, dispatcher
+
 from SaitamaRobot.modules.connection import connected
 from SaitamaRobot.modules.disable import DisableAbleCommandHandler
 from SaitamaRobot.modules.helper_funcs.alternate import send_message
@@ -348,6 +349,13 @@ def del_blackliststicker(update: Update, context: CallbackContext):
     to_match = message.sticker
     if not to_match or not to_match.set_name:
         return
+      
+    chat_id = str(chat.id)[1:] 
+    approve_list = list(REDIS.sunion(f'approve_list_{chat_id}'))
+    target_user = mention_html(user.id, user.first_name)
+    if target_user in approve_list:
+        return
+
     bot = context.bot
     getmode, value = sql.get_blacklist_setting(chat.id)
 
