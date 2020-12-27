@@ -7,6 +7,7 @@ from telegram.ext import CommandHandler, MessageHandler, Filters, run_async
 from telegram.utils.helpers import mention_html
 
 import SaitamaRobot.modules.sql.blacklist_sql as sql
+from SaitamaRobot import dispatcher, REDIS, ERROR_DUMP
 from SaitamaRobot import dispatcher, LOGGER
 from SaitamaRobot.modules.disable import DisableAbleCommandHandler
 from SaitamaRobot.modules.helper_funcs.chat_status import user_admin, user_not_admin
@@ -341,6 +342,12 @@ def del_blacklist(update, context):
     bot = context.bot
     to_match = extract_text(message)
     if not to_match:
+        return
+
+    chat_id = str(chat.id)[1:] 
+    approve_list = list(REDIS.sunion(f'approve_list_{chat_id}'))
+    target_user = mention_html(user.id, user.first_name)
+    if target_user in approve_list:
         return
 
     getmode, value = sql.get_blacklist_setting(chat.id)
