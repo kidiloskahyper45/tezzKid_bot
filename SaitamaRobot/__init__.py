@@ -188,8 +188,6 @@ try:
 except BaseException:
     raise Exception("Your redis server is not alive, please check again.")
 
-pbot = Client("saberPyro", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
-   
     
 if not SPAMWATCH_API:
     sw = None
@@ -197,7 +195,8 @@ if not SPAMWATCH_API:
 else:
     sw = spamwatch.Client(SPAMWATCH_API)
 
-updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
+
+    updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
 telethn = TelegramClient("saitama", API_ID, API_HASH)
 pbot = Client("senkuPyro", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 dispatcher = updater.dispatcher
