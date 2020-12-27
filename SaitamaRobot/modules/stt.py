@@ -1,4 +1,4 @@
-from tg_bot import client
+from SaitamaRobot import telethn
 import os
 import urllib.request
 from datetime import datetime
@@ -35,7 +35,7 @@ async def is_register_admin(chat, user):
     return False
 
 
-@register(pattern="^/stt$")
+@telethn(pattern="^/stt$")
 async def _(event):
     if event.fwd_from:
         return
