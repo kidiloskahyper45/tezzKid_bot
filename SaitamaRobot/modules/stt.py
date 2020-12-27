@@ -41,7 +41,7 @@ async def _(event):
         return
     if event.is_group:
      if not (await is_register_admin(event.input_chat, event.message.sender_id)):
-       await event.reply(" Hi.. You are not admin.. You can't use this command.. But you can use in my pm🙈")
+       await event.reply(" Hey! You are not admin so you can't use this command here \nBut can use it in my pm 🙈")
        return
 
     start = datetime.now()
@@ -50,7 +50,7 @@ async def _(event):
 
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
-        required_file_name = await event.telethn.download_media(
+        required_file_name = await event.client.download_media(
             previous_message, TEMP_DOWNLOAD_DIRECTORY
         )
         if IBM_WATSON_CRED_URL is None or IBM_WATSON_CRED_PASSWORD is None:
