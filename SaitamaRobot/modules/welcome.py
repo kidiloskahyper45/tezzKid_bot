@@ -1021,7 +1021,7 @@ __help__ = """
  • `/resetgoodbye`*:* reset to the default goodbye message.
  • `/cleanwelcome <on/off>`*:* On new member, try to delete the previous welcome message to avoid spamming the chat.
  • `/welcomemutehelp`*:* gives information about welcome mutes.
- • `/cleanservice <on/off`*:* deletes telegrams welcome/left service messages. 
+ • `/cleanservice <on/off>`*:* deletes telegrams welcome/left service messages. 
  *Example:*
 user joined chat, user left chat.
 
