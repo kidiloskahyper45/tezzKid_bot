@@ -4,6 +4,7 @@ from typing import Optional
 
 import telegram
 from SaitamaRobot import TIGERS, WOLVES, dispatcher
+from SaitamaRobot import dispatcher, REDIS 
 from SaitamaRobot.modules.disable import DisableAbleCommandHandler
 from SaitamaRobot.modules.helper_funcs.chat_status import (bot_admin,
                                                            can_restrict,
@@ -345,6 +346,14 @@ def reply_filter(update: Update, context: CallbackContext) -> str:
     if user.id == 777000:
         return
 
+    
+    chat_id = str(chat.id)[1:] 
+    approve_list = list(REDIS.sunion(f'approve_list_{chat_id}'))
+    target_user = mention_html(user.id, user.first_name)
+    if target_user in approve_list:
+        return
+
+      
     chat_warn_filters = sql.get_chat_warn_triggers(chat.id)
     to_match = extract_text(message)
     if not to_match:
