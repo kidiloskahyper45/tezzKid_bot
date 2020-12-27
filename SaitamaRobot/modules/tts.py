@@ -47,11 +47,13 @@ def tts(update: Update, context: CallbackContext):
         update.message.reply_voice(speech, quote=False)
 
 __help__ = """
- - `/tts <text>`: convert text to speech
+ • `/tts <text>`*:* convert text to speech
+ • `/stt <text>`*:* convert speech to text
+
  """
 TTS_HANDLER = DisableAbleCommandHandler("tts", tts, pass_args=True)
 dispatcher.add_handler(TTS_HANDLER)
 
-__mod_name__ = "TTS"
+__mod_name__ = "TTS - STT"
 __command_list__ = ["tts"]
 __handlers__ = [TTS_HANDLER]
