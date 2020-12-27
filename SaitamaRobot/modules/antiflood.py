@@ -4,6 +4,7 @@ from typing import Optional, List
 from telegram import Message, Chat, Update, User, ChatPermissions
 
 from SaitamaRobot import TIGERS, WOLVES, dispatcher
+from SaitamaRobot import dispatcher, REDIS
 from SaitamaRobot.modules.helper_funcs.chat_status import (bot_admin,
                                                            is_user_admin,
                                                            user_admin,
@@ -25,6 +26,14 @@ def check_flood(update, context) -> str:
     user = update.effective_user  # type: Optional[User]
     chat = update.effective_chat  # type: Optional[Chat]
     msg = update.effective_message  # type: Optional[Message]
+    
+    chat_id = str(chat.id)[1:] 
+    approve_list = list(REDIS.sunion(f'approve_list_{chat_id}'))
+    target_user = mention_html(user.id, user.first_name)
+    if target_user in approve_list:
+        return
+  
+    
     if not user:  # ignore channels
         return ""
 
