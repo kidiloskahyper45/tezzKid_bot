@@ -19,14 +19,14 @@ async def is_register_admin(chat, user):
     if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
         return isinstance(
             (
-                await client(functions.channels.GetParticipantRequest(chat, user))
+                await telethn(functions.channels.GetParticipantRequest(chat, user))
             ).participant,
             (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
         )
     if isinstance(chat, types.InputPeerChat):
-        ui = await client.get_peer_id(user)
+        ui = await telethn.get_peer_id(user)
         ps = (
-            await client(functions.messages.GetFullChatRequest(chat.chat_id))
+            await telethn(functions.messages.GetFullChatRequest(chat.chat_id))
         ).full_chat.participants.participants
         return isinstance(
             next((p for p in ps if p.user_id == ui), None),
@@ -50,7 +50,7 @@ async def _(event):
 
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
-        required_file_name = await event.client.download_media(
+        required_file_name = await event.telethn.download_media(
             previous_message, TEMP_DOWNLOAD_DIRECTORY
         )
         if IBM_WATSON_CRED_URL is None or IBM_WATSON_CRED_PASSWORD is None:
