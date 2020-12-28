@@ -1,3 +1,4 @@
+
 import os
 import time
 import html
@@ -102,7 +103,7 @@ async def whatanime(c: Client, m: Message):
             if episode:
                 text += f'<b>Episode:</b> {episode}\n'
             if nsfw:
-                text += '<b>Hen*ai/NSFW:</b> no'
+                text += '<b>Hentai/NSFW:</b> no'
 
             async def _send_preview():
                 url = f'https://media.trace.moe/video/{anilist_id}/{urlencode(filename)}?t={at_time}&token={tokenthumb}'
