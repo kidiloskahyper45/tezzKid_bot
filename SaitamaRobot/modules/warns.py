@@ -4,28 +4,46 @@ from typing import Optional
 
 import telegram
 from SaitamaRobot import TIGERS, WOLVES, dispatcher
-from SaitamaRobot import dispatcher, REDIS 
 from SaitamaRobot.modules.disable import DisableAbleCommandHandler
-from SaitamaRobot.modules.helper_funcs.chat_status import (bot_admin,
-                                                           can_restrict,
-                                                           is_user_admin,
-                                                           user_admin,
-                                                           user_admin_no_reply)
-from SaitamaRobot.modules.helper_funcs.extraction import (extract_text,
-                                                          extract_user,
-                                                          extract_user_and_text)
+from SaitamaRobot.modules.helper_funcs.chat_status import (
+    bot_admin,
+    can_restrict,
+    is_user_admin,
+    user_admin,
+    user_admin_no_reply,
+)
+from SaitamaRobot.modules.helper_funcs.extraction import (
+    extract_text,
+    extract_user,
+    extract_user_and_text,
+)
 from SaitamaRobot.modules.helper_funcs.filters import CustomFilters
 from SaitamaRobot.modules.helper_funcs.misc import split_message
 from SaitamaRobot.modules.helper_funcs.string_handling import split_quotes
 from SaitamaRobot.modules.log_channel import loggable
 from SaitamaRobot.modules.sql import warns_sql as sql
-from telegram import (CallbackQuery, Chat, InlineKeyboardButton,
-                      InlineKeyboardMarkup, Message, ParseMode, Update, User)
+from telegram import (
+    CallbackQuery,
+    Chat,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    Message,
+    ParseMode,
+    Update,
+    User,
+)
 from telegram.error import BadRequest
-from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler,
-                          DispatcherHandlerStop, Filters, MessageHandler,
-                          run_async)
+from telegram.ext import (
+    CallbackContext,
+    CallbackQueryHandler,
+    CommandHandler,
+    DispatcherHandlerStop,
+    Filters,
+    MessageHandler,
+    run_async,
+)
 from telegram.utils.helpers import mention_html
+from SaitamaRobot.modules.sql.approve_sql import is_approved
 
 WARN_HANDLER_GROUP = 9
 CURRENT_WARNING_FILTER_STRING = "<b>Current warning filters in this chat:</b>\n"
@@ -146,7 +164,8 @@ def button(update: Update, context: CallbackContext) -> str:
             update.effective_message.edit_text(
                 "Warn removed by {}.".format(
                     mention_html(user.id, user.first_name)),
-                parse_mode=ParseMode.HTML)
+                parse_mode=ParseMode.HTML,
+            )
             user_member = chat.get_member(user_id)
             return (
                 f"<b>{html.escape(chat.title)}:</b>\n"
@@ -174,9 +193,15 @@ def warn_user(update: Update, context: CallbackContext) -> str:
     user_id, reason = extract_user_and_text(message, args)
 
     if user_id:
-        if message.reply_to_message and message.reply_to_message.from_user.id == user_id:
-            return warn(message.reply_to_message.from_user, chat, reason,
-                        message.reply_to_message, warner)
+        if (message.reply_to_message and
+                message.reply_to_message.from_user.id == user_id):
+            return warn(
+                message.reply_to_message.from_user,
+                chat,
+                reason,
+                message.reply_to_message,
+                warner,
+            )
         else:
             return warn(
                 chat.get_member(user_id).user, chat, reason, message, warner)
@@ -223,7 +248,9 @@ def warns(update: Update, context: CallbackContext):
         limit, soft_warn = sql.get_warn_setting(chat.id)
 
         if reasons:
-            text = f"This user has {num_warns}/{limit} warns, for the following reasons:"
+            text = (
+                f"This user has {num_warns}/{limit} warns, for the following reasons:"
+            )
             for reason in reasons:
                 text += f"\n • {reason}"
 
@@ -340,20 +367,13 @@ def reply_filter(update: Update, context: CallbackContext) -> str:
     message: Optional[Message] = update.effective_message
     user: Optional[User] = update.effective_user
 
-    if not user:  #Ignore channel
+    if not user:  # Ignore channel
         return
 
     if user.id == 777000:
         return
-
-    
-    chat_id = str(chat.id)[1:] 
-    approve_list = list(REDIS.sunion(f'approve_list_{chat_id}'))
-    target_user = mention_html(user.id, user.first_name)
-    if target_user in approve_list:
+    if is_approved(chat.id, user.id):
         return
-
-      
     chat_warn_filters = sql.get_chat_warn_triggers(chat.id)
     to_match = extract_text(message)
     if not to_match:
@@ -434,11 +454,13 @@ def set_warn_strength(update: Update, context: CallbackContext):
         if soft_warn:
             msg.reply_text(
                 "Warns are currently set to *punch* users when they exceed the limits.",
-                parse_mode=ParseMode.MARKDOWN)
+                parse_mode=ParseMode.MARKDOWN,
+            )
         else:
             msg.reply_text(
                 "Warns are currently set to *Ban* users when they exceed the limits.",
-                parse_mode=ParseMode.MARKDOWN)
+                parse_mode=ParseMode.MARKDOWN,
+            )
     return ""
 
 
@@ -450,7 +472,7 @@ def __stats__():
 
 
 def __import_data__(chat_id, data):
-    for user_id, count in data.get('warns', {}).items():
+    for user_id, count in data.get("warns", {}).items():
         for x in range(int(count)):
             sql.warn_user(user_id, chat_id)
 
