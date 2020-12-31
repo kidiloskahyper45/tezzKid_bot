@@ -4,9 +4,6 @@ import sys
 import time
 import spamwatch
 
-#adding approval module
-from redis import StrictRedis
-
 from pyrogram import Client, errors
 
 import telegram.ext as tg
@@ -74,7 +71,6 @@ if ENV:
     URL = os.environ.get('URL', "")  # Does not contain token
     PORT = int(os.environ.get('PORT', 5000))
     CERT_PATH = os.environ.get("CERT_PATH")
-    REDISCLOUD_URL = os.environ.get('REDISCLOUD_URL')
     ERROR_DUMP = os.environ.get('ERROR_DUMP', None)
     API_ID = os.environ.get('API_ID', None)
     API_HASH = os.environ.get('API_HASH', None)
@@ -178,15 +174,6 @@ else:
 DRAGONS.add(OWNER_ID)
 
 DEV_USERS.add(OWNER_ID)
-
-#adding approval module @FtSasuke
-
-REDIS = StrictRedis.from_url(REDISCLOUD_URL,decode_responses=True)
-try:
-    REDIS.ping()
-    LOGGER.info("Your redis server is now alive!")
-except BaseException:
-    raise Exception("Your redis server is not alive, please check again.")
 
     
 if not SPAMWATCH_API:
