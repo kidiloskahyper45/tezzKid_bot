@@ -200,7 +200,7 @@ def start(update: Update, context: CallbackContext):
                 reply_markup=InlineKeyboardMarkup(
                     [[
                         InlineKeyboardButton(
-                            text=" 👑 GET StArT🏓",
+                            text="🚀GET StArT🏓",
                             url="t.me/{}?startgroup=true".format(
                                 context.bot.username)),
                          InlineKeyboardButton(
@@ -219,7 +219,7 @@ def start(update: Update, context: CallbackContext):
                      [
                         InlineKeyboardButton(
                              text=" ❤️ Source Code ",
-                             url="Sorry it's Not opened yet")
+                             url="https://t.me/joinchat/SZMhCiGVTZwi2uOQ")
                     
                     ]]))
     else:
