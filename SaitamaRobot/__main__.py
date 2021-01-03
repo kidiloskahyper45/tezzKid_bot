@@ -200,7 +200,7 @@ def start(update: Update, context: CallbackContext):
                 reply_markup=InlineKeyboardMarkup(
                     [[
                         InlineKeyboardButton(
-                            text="🚀GET StArT🏓",
+                            text="🚀ADD ME🏓",
                             url="t.me/{}?startgroup=true".format(
                                 context.bot.username)),
                          InlineKeyboardButton(
@@ -212,14 +212,14 @@ def start(update: Update, context: CallbackContext):
                             text=" ✨ Help ",
                             url="https://t.me/Misstezza_bot?start=help"),
                          InlineKeyboardButton(
-                            text=" ⚡️ Get Started ",
+                            text=" 🚴Made by 🛸 ",
                              url="https://t.me/rosebakthan")        
                        
                      ],
                      [
                         InlineKeyboardButton(
-                             text=" ❤️ Source Code ",
-                             url="https://t.me/joinchat/SZMhCiGVTZwi2uOQ")
+                             text=" 🔖 Source Code ",
+                             url="https://t.me/nokkiirunnoippokittum")
                     
                     ]]))
     else:
