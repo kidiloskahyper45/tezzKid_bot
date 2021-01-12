@@ -77,7 +77,7 @@ And the following:
     dispatcher.bot.first_name, ""
     if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
 
-SAITAMA_IMG = "https://telegra.ph/file/db60020d6948a78a52fd4.jpg"
+SAITAMA_IMG = "https://telegra.ph/file/ac7ca1de0736caab60152.jpg"
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
 Senku is hosted on one of Heroku's Servers and doesn't require any donations as of now but \
@@ -209,7 +209,7 @@ def start(update: Update, context: CallbackContext):
                      ],
                      [
                         InlineKeyboardButton(
-                            text=" ✨ Help ",
+                            text=" 🔮Help ",
                             url="https://t.me/Misstezza_bot?start=help"),
                          InlineKeyboardButton(
                             text=" 🚴Made by 🛸 ",
@@ -323,7 +323,7 @@ def get_help(update: Update, context: CallbackContext):
         if len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
             module = args[1].lower()
             update.effective_message.reply_text(
-                f"Contact me in PM to get help of {module.capitalize()}",
+                f"Contact me in PM to get 🔖help of {module.capitalize()}",
                 reply_markup=InlineKeyboardMarkup([[
                     InlineKeyboardButton(
                         text="Help",
