@@ -77,7 +77,7 @@ And the following:
     dispatcher.bot.first_name, ""
     if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
 
-SAITAMA_IMG = "https://telegra.ph/file/ac7ca1de0736caab60152.jpg"
+SAITAMA_IMG = "https://telegra.ph/file/dc23351053dbb093f5076.jpg"
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
 Senku is hosted on one of Heroku's Servers and doesn't require any donations as of now but \
@@ -205,12 +205,12 @@ def start(update: Update, context: CallbackContext):
                                 context.bot.username)),
                          InlineKeyboardButton(
                              text=" 🔔 Updates ",
-                             url="https://t.me/rosebakthan")
+                             url="https://t.me/TG_BotZ")
                      ],
                      [
                         InlineKeyboardButton(
                             text=" 🔮Help ",
-                            url="https://t.me/Misstezza_bot?start=help"),
+                            url="https://t.me/ELIZABETHTG_bot?start=help"),
                          InlineKeyboardButton(
                             text=" 🚴Made by 🛸 ",
                              url="https://t.me/rosebakthan")        
