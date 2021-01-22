@@ -46,7 +46,7 @@ async def download_video(v_url):
     lazy = v_url ; sender = await lazy.get_sender() ; me = await lazy.client.get_me()
 
     if not sender.id == me.id:
-        rkp = await lazy.reply("`processing...`")
+        rkp = await lazy.reply("`processing⚡`")
     else:
     	rkp = await lazy.edit("`processing...`")   
     url = v_url.pattern_match.group(1)
@@ -61,7 +61,7 @@ async def download_video(v_url):
     except:
     	return await rkp.edit("`failed to find`")
     type = "audio"
-    await rkp.edit("`Preparing to download...`")
+    await rkp.edit("`✔️...`")
     if type == "audio":
         opts = {
             'format':
@@ -93,7 +93,7 @@ async def download_video(v_url):
         video = False
         song = True    
     try:
-        await rkp.edit("`Fetching data, please wait..`")
+        await rkp.edit("`🛸..`")
         with YoutubeDL(opts) as rip:
             rip_data = rip.extract_info(url)
     except DownloadError as DE:
@@ -127,7 +127,7 @@ async def download_video(v_url):
         return
     c_time = time.time()
     if song:
-        await rkp.edit(f"`Preparing to upload song:`\
+        await rkp.edit(f"`upload👩‍✈️:`\
         \n**{rip_data['title']}**\
         \nby *{rip_data['uploader']}*")
         await v_url.client.send_file(
@@ -179,7 +179,7 @@ async def download_video(v_url):
     except:
     	return await rkp.edit("`failed to find`")
     type = "audio"
-    await rkp.edit("`Preparing to download...`")
+    await rkp.edit("`✔️...`")
     if type == "audio":
         opts = {
             'format':
@@ -208,7 +208,7 @@ async def download_video(v_url):
         song = False
         video = True
     try:
-        await rkp.edit("`Fetching data, please wait..`")
+        await rkp.edit("`💃..`")
         with YoutubeDL(opts) as rip:
             rip_data = rip.extract_info(url)
     except DownloadError as DE:
@@ -283,4 +283,4 @@ __help__ = """
  ➩ /video <songname artist(optional)>: uploads the video song in it's best quality available
 """
 
-__mod_name__ = "Songs"
+__mod_name__ = "💃Songs"
