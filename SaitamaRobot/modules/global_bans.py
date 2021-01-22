@@ -140,7 +140,7 @@ def gban(update: Update, context: CallbackContext):
 
         return
 
-    message.reply_text("On it!")
+    message.reply_text("On it!User id added to gban spam watch ⚡")
 
     start_time = time.time()
     datetime_fmt = "%Y-%m-%dT%H:%M"
@@ -221,7 +221,7 @@ def gban(update: Update, context: CallbackContext):
         send_to_list(
             bot,
             DRAGONS + DEMONS,
-            f"Gban complete! (User banned in <code>{gbanned_chats}</code> chats)",
+            f"Gban complete🛸! (User banned in <code>{gbanned_chats}</code> chats)",
             html=True)
 
     end_time = time.time()
