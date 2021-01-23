@@ -173,36 +173,7 @@ def remove_bluetext_ignore_global(update: Update, context: CallbackContext):
         message.reply_text(reply)
 
 
-@run_async
-@dev_plus
-def bluetext_ignore_list(update: Update, context: CallbackContext):
-
-    message = update.effective_message
-    chat = update.effective_chat
-
-    global_ignored_list, local_ignore_list = sql.get_all_ignored(chat.id)
-    text = ""
-
-    if global_ignored_list:
-        text = "The following commands are currently ignored globally from bluetext cleaning :\n"
-
-        for x in global_ignored_list:
-            text += f" - <code>{x}</code>\n"
-
-    if local_ignore_list:
-        text += "\nThe following commands are currently ignored locally from bluetext cleaning :\n"
-
-        for x in local_ignore_list:
-            text += f" - <code>{x}</code>\n"
-
-    if text == "":
-        text = "No commands are currently ignored from bluetext cleaning."
-        message.reply_text(text)
-        return
-
-    message.reply_text(text, parse_mode=ParseMode.HTML)
-    return
-
+@run_async@dev_plusdef bluetext_ignore_list(bot: Bot, update: Update): message = update.effective_message chat = update.effective_chat global_ignored_list, local_ignore_list = sql.get_all_ignored(chat.id) text = "" if global_ignored_list: text = "The following commands are currently ignored globally from bluetext cleaning :\n" for x in global_ignored_list: text += f" - <code>{x}</code>\n" if local_ignore_list: text += "\nThe following commands are currently ignored locally from bluetext cleaning :\n" for x in local_ignore_list: text += f" - <code>{x}</code>\n" if text == "": text = "No commands are currently ignored from bluetext cleaning." message.reply_text(text) return message.reply_text(text, parse_mode=ParseMode.HTML) return
 
 __help__ = """
 Blue text cleaner removed any made up commands that people send in your chat.
