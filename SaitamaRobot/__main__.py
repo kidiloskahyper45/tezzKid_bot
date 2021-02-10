@@ -77,7 +77,7 @@ And the following:
     dispatcher.bot.first_name, ""
     if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
 
-SAITAMA_IMG = "https://telegra.ph/file/dc23351053dbb093f5076.jpg"
+SAITAMA_IMG = "https://telegra.ph/file/3a93d9603a747d32bd4d6.jpg"
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
 Senku is hosted on one of Heroku's Servers and doesn't require any donations as of now but \
@@ -210,7 +210,7 @@ def start(update: Update, context: CallbackContext):
                      [
                         InlineKeyboardButton(
                             text=" 🔮Help ",
-                            url="https://t.me/ELIZABETHTG_bot?start=help"),
+                            url="https://t.me/VillainproBot?start=help"),
                          InlineKeyboardButton(
                             text=" 🚴Made by 🛸 ",
                              url="https://t.me/rosebakthan")        
@@ -326,7 +326,7 @@ def get_help(update: Update, context: CallbackContext):
                 f"Contact me in PM to get 🔖help of {module.capitalize()}",
                 reply_markup=InlineKeyboardMarkup([[
                     InlineKeyboardButton(
-                        text="Help",
+                        text="Help❔",
                         url="t.me/{}?start=ghelp_{}".format(
                             context.bot.username, module))
                 ]]))
@@ -335,7 +335,7 @@ def get_help(update: Update, context: CallbackContext):
             "Contact me in PM to get the list of possible commands.",
             reply_markup=InlineKeyboardMarkup([[
                 InlineKeyboardButton(
-                    text="Help",
+                    text="Help ❔",
                     url="t.me/{}?start=help".format(context.bot.username))
             ]]))
         return
